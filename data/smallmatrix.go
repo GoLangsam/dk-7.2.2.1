@@ -11,13 +11,13 @@ import (
 func SmallMatrix() dl.Matrix {
 
 	return dl.Problem([][]string{
-		[]string{"a", "b", "c", "d", "e", "f", "g"},
-		[]string{},
-		[]string{"c", "e"},
-		[]string{"a", "d", "g"},
-		[]string{"b", "c", "f"},
-		[]string{"a", "d", "f"},
-		[]string{"b", "g"},
-		[]string{"d", "e", "g"},
+		{"a", "b", "c", "d", "e", "f", "g"},
+		{},
+		{"c", "e"},
+		{"a", "d", "g"},
+		{"b", "c", "f"},
+		{"a", "d", "f"},
+		{"b", "g"},
+		{"d", "e", "g"},
 	}...).Matrix()
 }

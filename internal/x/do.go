@@ -20,7 +20,7 @@ type Do struct {
 	*Items
 	*Optas
 	*Stack
-	Do func(int)
+	Do func(Index)
 }
 
 // ===========================================================================

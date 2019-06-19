@@ -11,7 +11,7 @@ import (
 // ===========================================================================
 
 // AddList appends a root for a new itemlist rooted at `root`.
-func (a *M) AddList(root int) {
+func (a *M) AddList(root x.Index) {
 
 	var name string
 
@@ -30,9 +30,9 @@ func (a *M) AddList(root int) {
 }
 
 // AddItem appends a named item to the itemlist rooted at `root`.
-func (a *M) AddItem(name string, root int) {
+func (a *M) AddItem(name string, root x.Index) {
 
-	a.Names.Dict.LearnOnce(x.Name(name), len(a.ItemS))
+	a.Names.Dict.LearnOnce(x.Name(name), x.Index(len(a.ItemS)))
 	a.Names.NameS = a.Names.NameS.AppendName(name)
 
 	a.Items.ItemS = a.Items.ItemS.AppendItem(root)
@@ -41,14 +41,14 @@ func (a *M) AddItem(name string, root int) {
 }
 
 // AddMark appends a spacer. Note: The mark should be < 0.
-func (a *M) AddMark(mark, prev int) {
+func (a *M) AddMark(mark, prev x.Index) {
 
-	a.Optas.MarkS = a.Optas.MarkS.AppendMark(len(a.OptaS))
+	a.Optas.MarkS = a.Optas.MarkS.AppendMark(x.Index(len(a.OptaS)))
 	a.Optas.OptaS = a.Optas.OptaS.AppendMark(mark, prev)
 }
 
 // AddCell appends a cell to the (vertical) list rooted at item `root`.
-func (a *M) AddCell(root int) {
+func (a *M) AddCell(root x.Index) {
 
 	a.Optas.OptaS = a.Optas.OptaS.AppendOpta(root)
 }

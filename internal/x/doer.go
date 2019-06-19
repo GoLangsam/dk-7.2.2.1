@@ -17,7 +17,7 @@ type DoIf struct {
 	DoIt bool
 }
 
-func (a *DoIf) DoIf(i int) {
+func (a *DoIf) DoIf(i Index) {
 	if a != nil && a.DoIt && a.Do.Do != nil {
 		a.Do.Do(i)
 	}

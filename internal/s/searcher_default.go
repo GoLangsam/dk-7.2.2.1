@@ -6,6 +6,8 @@ package s
 
 import (
 	"fmt"
+
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
 
 // ========================================================
@@ -28,7 +30,7 @@ func (a *Searcher) onGoal() bool { // Do we have a solution?
 	if root.Next == 0 { // YES We have a solution
 		if a.logOnGoal { // ... we may show it
 			fmt.Println("Solution:")
-			show := func(i int) { fmt.Print(a.m.NameS[a.OptaS[i].Root], tab) }
+			show := func(i x.Index) { fmt.Print(a.m.NameS[a.OptaS[i].Root], tab) }
 			do := a.m.Do(show)
 			for _, opta := range a.Stack {
 				// show(opta)
@@ -46,12 +48,12 @@ func (a *Searcher) onGoal() bool { // Do we have a solution?
 
 // chooseMRV searches the next item to be considered (if any).
 // It implements the MRV heuristic.
-func (a *Searcher) chooseMRV() (here int, found bool) {
+func (a *Searcher) chooseMRV() (here x.Index, found bool) {
 
-	Size := len(a.OptaS) // larger than anything we'll find.
+	Size := x.Index(len(a.OptaS)) // larger than anything we'll find.
 
 	root := a.ItemS[0]
-	for curr, size := root.Next, 0; curr != 0; curr = a.ItemS[curr].Next {
+	for curr, size := root.Next, x.Index(0); curr != 0; curr = a.ItemS[curr].Next {
 
 		size = a.OptaS[curr].Root
 		// TODO: the "non-sharp/sharp preference"-Heuristics

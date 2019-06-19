@@ -4,6 +4,10 @@
 
 package s
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // SetPacer returns a function which
 // sets D.On.Next to v
 // and returns it's undo doFn.
@@ -20,7 +24,7 @@ func SetPacer(v func()) Setter {
 // CallOnHere returns a function which
 // sets D.On.Here to v
 // and returns it's undo doFn.
-func CallOnHere(v func() int) Setter {
+func CallOnHere(v func() x.Index) Setter {
 	return func(a *Searcher) doFn {
 		prev := a.D.On.Here
 		a.D.On.Here = v
@@ -33,7 +37,7 @@ func CallOnHere(v func() int) Setter {
 // CallOnLeaf returns a function which
 // sets D.On.Leaf to v
 // and returns it's undo doFn.
-func CallOnLeaf(v func(int)) Setter {
+func CallOnLeaf(v func(x.Index)) Setter {
 	return func(a *Searcher) doFn {
 		prev := a.D.On.Leaf
 		a.D.On.Leaf = v

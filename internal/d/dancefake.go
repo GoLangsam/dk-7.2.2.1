@@ -4,14 +4,18 @@
 
 package d
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // ===========================================================================
 
-func (a *D) DanceFake(here int) {
+func (a *D) DanceFake(here x.Index) {
 	fake := here
 	a.ItemS.DeTach(fake)
 	a.Stack.Push(here)
 	if a.On.Leaf != nil {
-		a.On.Leaf(len(a.Stack))
+		a.On.Leaf(x.Index(len(a.Stack)))
 	}
 	a.On.Next()
 	a.Stack.Drop()

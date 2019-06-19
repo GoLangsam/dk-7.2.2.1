@@ -14,13 +14,13 @@ import (
 // which provides iterating methods ForEach.... or some conditional Doer.
 //
 // Note: Do for a Searcher returns the Do of the embedded D.
-func (a *Searcher) Do(f func(int)) x.Do {
+func (a *Searcher) Do(f func(x.Index)) x.Do {
 	return a.D.Do(f)
 }
 
 // ===========================================================================
 
-func (a *Searcher) DoIf(f func(int)) *x.DoIf {
+func (a *Searcher) DoIf(f func(x.Index)) *x.DoIf {
 	return &x.DoIf{Do: x.Do{Do: f}}
 }
 

@@ -41,14 +41,14 @@ func New(M *m.M) D {
 // TODO: DK Version for AlgX - put elsewhere !!!
 func (a *D) Choice() (here Index) {
 
-	Size := len(a.OptaS) // larger than anything we'll find.
+	Size := Index(len(a.OptaS)) // larger than anything we'll find.
 	root := &a.ItemS[0]
 
 	if root.Next == 0 {
 		panic("Choice called on empty list!")
 	}
 
-	var size int
+	var size Index
 	for curr := root.Next; curr != 0; curr = a.ItemS[curr].Next {
 		size = a.OptaS[curr].Root
 		// TODO: the "non-sharp/sharp preference"-Heuristics

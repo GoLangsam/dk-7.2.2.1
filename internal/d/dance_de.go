@@ -4,6 +4,10 @@
 
 package d
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // ===========================================================================
 
 func (a *D) DoCoverOthers(vi Index) {
@@ -101,7 +105,7 @@ func (a *D) DoHide(p Index) {
 						a.Drum.Map[qi]++
 					}
 					if a.On.Leaf != nil { // count update per Level
-						a.On.Leaf(len(a.Stack))
+						a.On.Leaf(x.Index(len(a.Stack)))
 					}
 					// End of Update-Count =======================================
 				}

@@ -51,14 +51,14 @@ func (a Items) Clone() Items {
 
 // AppendList appends a root for a new doubly linked list.
 func (a ItemS) AppendList(root Index) ItemS {
-	c := len(a) // shall create a[c]
+	c := Index(len(a)) // shall create a[c]
 
 	return append(a, Item{Prev: c, Next: c})
 }
 
 // AppendItem appends another item to the doubly linked list rooted at root.
 func (a ItemS) AppendItem(root Index) ItemS {
-	c := len(a)                    // shall create a[c]
+	c := Index(len(a))             // shall create a[c]
 	p := c - 1                     // Prev
 	a[p].Next, a[root].Prev = c, c // adjust existing Prev.Next & root.Prev
 

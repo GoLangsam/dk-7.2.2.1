@@ -7,7 +7,7 @@ package x
 // ===========================================================================
 
 // ForEachPrev.
-func (a Do) ForEachPrev(root int) {
+func (a Do) ForEachPrev(root Index) {
 
 	for curr := a.ItemS[root].Prev; curr != root; curr = a.ItemS[curr].Prev {
 		a.Do(curr)
@@ -17,7 +17,7 @@ func (a Do) ForEachPrev(root int) {
 // ===========================================================================
 
 // ForEachOptaPrev.
-func (a Do) ForEachOptaPrev(root int) {
+func (a Do) ForEachOptaPrev(root Index) {
 
 	for curr := a.OptaS[root].Prev; curr != root; curr = a.OptaS[curr].Prev {
 		a.Do(curr)
@@ -27,7 +27,7 @@ func (a Do) ForEachOptaPrev(root int) {
 // ===========================================================================
 
 // ForEachLinePrev.
-func (a Do) ForEachLinePrev(i int) {
+func (a Do) ForEachLinePrev(i Index) {
 
 	here := i
 	if a.OptaS[here].Root < 0 { // Spacer
@@ -54,7 +54,7 @@ func (a Do) ForEachLinePrev(i int) {
 // ===========================================================================
 
 // ForEachOtherPrev.
-func (a Do) ForEachOtherPrev(i int) {
+func (a Do) ForEachOtherPrev(i Index) {
 
 	if a.OptaS[i].Root < 0 { // Spacer
 		a.ForEachLinePrev(i)

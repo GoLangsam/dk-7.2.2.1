@@ -4,14 +4,18 @@
 
 package s
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // ===========================================================================
 
 // On consolidates functions relevant for controlling behaviour.
 type On struct {
-	Done func() bool        // YES We have to return
-	Goal func() bool        // YES We have a solution
-	Fail func() (int, bool) // YES We have to go on goaling
-	Next func(int)          // and We have to dance here now
+	Done func() bool            // YES We have to return
+	Goal func() bool            // YES We have a solution
+	Fail func() (x.Index, bool) // YES We have to go on goaling
+	Next func(x.Index)          // and We have to dance here now
 }
 
 // ===========================================================================

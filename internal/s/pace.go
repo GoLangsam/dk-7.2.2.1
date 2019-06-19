@@ -4,12 +4,16 @@
 
 package s
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // pace is what dancer loves to follow.
 type pace struct {
 	On
 
 	drums
-	level int
+	level x.Index
 
 	beatOnSpin bool
 }

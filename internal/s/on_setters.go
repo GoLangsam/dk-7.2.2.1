@@ -4,10 +4,14 @@
 
 package s
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // SetDancer returns a function which
 // sets pace.On.Next to v
 // and returns it's undo doFn.
-func SetDancer(v func(int)) Setter {
+func SetDancer(v func(x.Index)) Setter {
 	return func(a *Searcher) doFn {
 		prev := a.pace.On.Next
 		a.pace.On.Next = v
@@ -46,7 +50,7 @@ func OnGoal(v func() bool) Setter {
 // SetChooser returns a function which
 // sets pace.On.Fail to v
 // and returns it's undo doFn.
-func SetChooser(v func() (int, bool)) Setter {
+func SetChooser(v func() (x.Index, bool)) Setter {
 	return func(a *Searcher) doFn {
 		prev := a.pace.On.Fail
 		a.pace.On.Fail = v

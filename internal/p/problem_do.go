@@ -14,13 +14,13 @@ import (
 // which provides iterating methods ForEach.... or some conditional DoIf.
 //
 // Note: Do for a P wraps an empty stack.
-func (a *P) Do(f func(int)) x.Do {
+func (a *P) Do(f func(x.Index)) x.Do {
 	return x.Do{&a.Items, &a.Optas, &x.Stack{}, f}
 }
 
 // ===========================================================================
 
-func (a *P) DoIf(f func(int)) *x.DoIf {
+func (a *P) DoIf(f func(x.Index)) *x.DoIf {
 	return &x.DoIf{Do: x.Do{Do: f}}
 }
 

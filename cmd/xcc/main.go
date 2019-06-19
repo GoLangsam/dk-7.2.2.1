@@ -9,6 +9,7 @@ import (
 
 	"github.com/GoLangsam/dk-7.2.2.1"
 	"github.com/GoLangsam/dk-7.2.2.1/data"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
 
 const tab = "\t"
@@ -26,33 +27,33 @@ func main() {
 	}
 
 	if false {
-		do := m.Do(func(i int) { fmt.Print(tab, m.NameS[i]) })
+		do := m.Do(func(i x.Index) { fmt.Print(tab, m.NameS[i]) })
 
-		do.ForEachNext(0) // 	a	b	c	d	e	f	g
-		fmt.Println()     // .
-		do.ForEachNext(3) // 	d	e	f	g		a	b
-		fmt.Println()     // .
-		do.ForEachPrev(0) // 	g	f	e	d	c	b	a
-		fmt.Println()     // .
-		do.ForEachPrev(3) // 	b	a		g	f	e	d
-		fmt.Println()     // .
+		do.ForEachNext(x.Index(0)) // 	a	b	c	d	e	f	g
+		fmt.Println()              // .
+		do.ForEachNext(x.Index(3)) // 	d	e	f	g		a	b
+		fmt.Println()              // .
+		do.ForEachPrev(x.Index(0)) // 	g	f	e	d	c	b	a
+		fmt.Println()              // .
+		do.ForEachPrev(x.Index(3)) // 	b	a		g	f	e	d
+		fmt.Println()              // .
 	}
 
 	if false {
-		do := m.Do(func(i int) { fmt.Print(m.NameS[m.OptaS[i].Root], tab) })
+		do := m.Do(func(i x.Index) { fmt.Print(m.NameS[m.OptaS[i].Root], tab) })
 
-		do.ForEachOtherNext(len(m.ItemS) + 1) // e
-		fmt.Println()                         // .
-		do.ForEachOtherNext(len(m.ItemS) + 2) // c
-		fmt.Println()                         // .
-		//do.ForEachOtherNext(len(m.ItemS) + 3) // log.Panic
+		do.ForEachOtherNext(x.Index(len(m.ItemS) + 1)) // e
+		fmt.Println()                                  // .
+		do.ForEachOtherNext(x.Index(len(m.ItemS) + 2)) // c
+		fmt.Println()                                  // .
+		//do.ForEachOtherNext(x.Index(len(m.ItemS) + 3)) // log.Panic
 		//fmt.Println()                         // .
-		do.ForEachOtherNext(len(m.ItemS) + 4) // d	g
-		fmt.Println()                         // .
-		do.ForEachOtherNext(len(m.ItemS) + 5) // g	a
-		fmt.Println()                         // .
-		do.ForEachOtherNext(len(m.ItemS) + 6) // a	d
-		fmt.Println()                         // .
+		do.ForEachOtherNext(x.Index(len(m.ItemS) + 4)) // d	g
+		fmt.Println()                                  // .
+		do.ForEachOtherNext(x.Index(len(m.ItemS) + 5)) // g	a
+		fmt.Println()                                  // .
+		do.ForEachOtherNext(x.Index(len(m.ItemS)) + 6) // a	d
+		fmt.Println()                                  // .
 	}
 
 	{

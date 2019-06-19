@@ -6,6 +6,6 @@ package x
 
 // ===========================================================================
 
-type Index = int
+type Index = int16
 
 // type Item = BiLi

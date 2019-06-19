@@ -53,15 +53,15 @@ func (a Optas) Clone() Optas {
 
 // AppendRoot appends another option root.
 func (a OptaS) AppendRoot(root Index) OptaS {
-	c := len(a)    // shall create a[c]
-	a[root].Root-- // decr length in Root-Item[root]
+	c := Index(len(a)) // shall create a[c]
+	a[root].Root--     // decr length in Root-Item[root]
 
 	return append(a, Opta{Item: Item{Prev: c, Next: c}})
 }
 
 // AppendOpta appends another option to the list for the item rooted at root.
 func (a OptaS) AppendOpta(root Index) OptaS {
-	c := len(a)                    // shall create a[c]
+	c := Index(len(a))             // shall create a[c]
 	p := a[root].Prev              // Prev
 	a[p].Next, a[root].Prev = c, c // adjust existing Prev.Next & Root.Prev
 	a[root].Root++                 // incr length in Root-Item[root]
@@ -125,7 +125,7 @@ func (a Opta) Col() Index {
 //
 // Applicable to OptaS[i] for 0 <= i <= len(ItemS).
 func (a Opta) Len() int {
-	return a.Root
+	return int(a.Root)
 }
 
 func (a Opta) Up() Index {

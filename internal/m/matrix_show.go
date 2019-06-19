@@ -7,18 +7,20 @@ package m
 import (
 	"fmt"
 	"log"
+
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
 
 // ===========================================================================
 
 // ShowOption exercice 12
-func (a *M) ShowOption(idx int) {
+func (a *M) ShowOption(idx x.Index) {
 
-	if idx <= len(a.ItemS) {
+	if idx <= x.Index(len(a.ItemS)) {
 		log.Panic("ShowOption: used on an item!")
 	}
 
-	if idx > len(a.OptaS) {
+	if idx > x.Index(len(a.OptaS)) {
 		log.Panic("ShowOption: index too large - no option here!")
 	}
 
@@ -26,7 +28,7 @@ func (a *M) ShowOption(idx int) {
 		log.Panic("ShowOption: used on a spacer!")
 	}
 
-	show := func(i int) {
+	show := func(i x.Index) {
 		fmt.Print(a.NameS[a.OptaS[i].Root], tab)
 	}
 

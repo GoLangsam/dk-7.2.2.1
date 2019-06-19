@@ -12,7 +12,7 @@ import (
 
 // ===========================================================================
 
-func Example_ForEachNext() {
+func Example_forEachNext() {
 	a := data.SmallMatrix()
 
 	showName := func(i int) { fmt.Print(" ", a.NameS[i]) }
@@ -26,7 +26,7 @@ func Example_ForEachNext() {
 	//  a b c d e f g
 }
 
-func Example_ForEachPrev() {
+func Example_forEachPrev() {
 	a := data.SmallMatrix()
 
 	showName := func(i int) { fmt.Print(" ", a.NameS[i]) }
@@ -42,7 +42,7 @@ func Example_ForEachPrev() {
 
 // ===========================================================================
 
-func Example_ForEachLineNext() {
+func Example_forEachLineNext() {
 	a := data.SmallMatrix()
 
 	showName := func(i int) { fmt.Print(" ", a.NameS[a.OptaS[i].Root]) }
@@ -63,7 +63,7 @@ func Example_ForEachLineNext() {
 	// #6: d e g
 }
 
-func Example_ForEachLinePrev() {
+func Example_forEachLinePrev() {
 	a := data.SmallMatrix()
 
 	showName := func(i int) { fmt.Print(" ", a.NameS[a.OptaS[i].Root]) }
@@ -86,7 +86,7 @@ func Example_ForEachLinePrev() {
 
 /*
 
-func Example_ForEachOptaPrev() {
+func Example_forEachOptaPrev() {
 	a := data.SmallMatrix()
 
 	for _, root := range a.Items.MarkS {
@@ -102,7 +102,7 @@ func Example_ForEachOptaPrev() {
 
 /*
 
-func Example_ForEachLineNext() {
+func Example_forEachLineNext() {
 	a := data.SmallMatrix()
 
 	for _, root := range a.Optas.MarkS {

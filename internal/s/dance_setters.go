@@ -44,12 +44,12 @@ func CallOnLeaf(v func(int)) Setter {
 }
 
 // CountUpdatesPerCell returns a function which
-// sets D.Drum.Verbose to v
+// sets D.Drum.UseMap to v
 // and returns it's undo doFn.
 func CountUpdatesPerCell(v bool) Setter {
 	return func(a *Searcher) doFn {
-		prev := a.D.Drum.Verbose
-		a.D.Drum.Verbose = v
+		prev := a.D.Drum.UseMap
+		a.D.Drum.UseMap = v
 		return func() doFn {
 			return CountUpdatesPerCell(prev)(a)
 		}

@@ -14,14 +14,14 @@ import (
 	//	"sync"
 )
 
-type counter map[int]int64
+type counter map[Index]int64
 
 // Drum is named counter
 type Drum struct {
-	Nam     string
-	Cnt     int64
-	Map     counter
-	Verbose bool
+	Nam    string
+	Cnt    int64
+	Map    counter
+	UseMap bool
 	//	sync.Mutex
 }
 
@@ -29,17 +29,17 @@ type Drum struct {
 func NewDrum(nam string, cap int) Drum {
 	return Drum{
 		Nam: nam,
-		Map: make(map[int]int64, cap),
+		Map: make(map[Index]int64, cap),
 	}
 }
 
 // Beat increments b.Cnt by one.
 // And iff b.Verbose then b.Map[cur] get incremented as well.
-func (b *Drum) Beat(cur int) {
+func (b *Drum) Beat(cur Index) {
 	//	b.Lock()
 	//	defer b.Unlock()
 	b.Cnt++
-	if b.Verbose {
+	if b.UseMap {
 		b.Map[cur]++
 	}
 }
@@ -50,7 +50,7 @@ func (b *Drum) Sort() []int {
 	//	defer b.Unlock()
 	var keys sort.IntSlice
 	for key := range b.Map {
-		keys = append(keys, key)
+		keys = append(keys, int(key))
 	}
 	keys.Sort() // Note: see also sort.Ints( []int )
 	return keys
@@ -65,9 +65,9 @@ func (b *Drum) Print() {
 		return
 	}
 	fmt.Printf("%s\t% 9d\t\n", b.Nam, b.Cnt)
-	if b.Verbose {
+	if b.UseMap {
 		for _, key := range b.Sort() {
-			fmt.Printf("%6d\t% 9d\t\n", key, b.Map[key])
+			fmt.Printf("%6d\t% 9d\t\n", key, b.Map[Index(key)])
 		}
 	}
 }

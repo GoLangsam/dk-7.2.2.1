@@ -97,7 +97,7 @@ func (a *D) DoHide(p Index) {
 
 					// Beg of Update-Count =======================================
 					a.Drum.Cnt++ // count update per Opta
-					if a.Drum.Verbose {
+					if a.Drum.UseMap {
 						a.Drum.Map[qi]++
 					}
 					if a.On.Leaf != nil { // count update per Level

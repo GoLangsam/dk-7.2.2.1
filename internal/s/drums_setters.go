@@ -18,12 +18,12 @@ func VerboseDrums(v bool) Setter {
 }
 
 // VerboseDrumsGoal returns a function which
-// sets pace.drums.Goal.verbose to v
+// sets pace.drums.Goal.UseMap to v
 // and returns it's undo doFn.
 func VerboseDrumsGoal(v bool) Setter {
 	return func(a *Searcher) doFn {
-		prev := a.pace.drums.Goal.Verbose
-		a.pace.drums.Goal.Verbose = v
+		prev := a.pace.drums.Goal.UseMap
+		a.pace.drums.Goal.UseMap = v
 		return func() doFn {
 			return VerboseDrumsGoal(prev)(a)
 		}
@@ -31,12 +31,12 @@ func VerboseDrumsGoal(v bool) Setter {
 }
 
 // VerboseDrumsFail returns a function which
-// sets pace.drums.Fail.verbose to v
+// sets pace.drums.Fail.UseMap to v
 // and returns it's undo doFn.
 func VerboseDrumsFail(v bool) Setter {
 	return func(a *Searcher) doFn {
-		prev := a.pace.drums.Fail.Verbose
-		a.pace.drums.Fail.Verbose = v
+		prev := a.pace.drums.Fail.UseMap
+		a.pace.drums.Fail.UseMap = v
 		return func() doFn {
 			return VerboseDrumsFail(prev)(a)
 		}
@@ -44,12 +44,12 @@ func VerboseDrumsFail(v bool) Setter {
 }
 
 // VerboseDrumsCall returns a function which
-// sets pace.drums.Call.verbose to v
+// sets pace.drums.Call.UseMap to v
 // and returns it's undo doFn.
 func VerboseDrumsCall(v bool) Setter {
 	return func(a *Searcher) doFn {
-		prev := a.pace.drums.Call.Verbose
-		a.pace.drums.Call.Verbose = v
+		prev := a.pace.drums.Call.UseMap
+		a.pace.drums.Call.UseMap = v
 		return func() doFn {
 			return VerboseDrumsCall(prev)(a)
 		}
@@ -57,12 +57,12 @@ func VerboseDrumsCall(v bool) Setter {
 }
 
 // VerboseDrumsLeaf returns a function which
-// sets pace.drums.leaf.verbose to v
+// sets pace.drums.leaf.UseMap to v
 // and returns it's undo doFn.
 func VerboseDrumsLeaf(v bool) Setter {
 	return func(a *Searcher) doFn {
-		prev := a.pace.drums.leaf.Verbose
-		a.pace.drums.leaf.Verbose = v
+		prev := a.pace.drums.leaf.UseMap
+		a.pace.drums.leaf.UseMap = v
 		return func() doFn {
 			return VerboseDrumsLeaf(prev)(a)
 		}

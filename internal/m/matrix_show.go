@@ -6,7 +6,6 @@ package m
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
@@ -17,15 +16,15 @@ import (
 func (a *M) ShowOption(idx x.Index) {
 
 	if idx <= x.Index(len(a.ItemS)) {
-		log.Panic("ShowOption: used on an item!")
+		die("ShowOption: used on an item!")
 	}
 
 	if idx > x.Index(len(a.OptaS)) {
-		log.Panic("ShowOption: index too large - no option here!")
+		die("ShowOption: index too large - no option here!")
 	}
 
 	if a.OptaS[idx].Root < 0 { // Spacer
-		log.Panic("ShowOption: used on a spacer!")
+		die("ShowOption: used on a spacer!")
 	}
 
 	show := func(i x.Index) {

@@ -7,7 +7,7 @@ package l
 // ===========================================================================
 
 // Indexable has to be implemented by any collection of Node
-// (which is typicaly some slice-type).
+// (which is typically some slice-type).
 //
 // The intention is to allow access to individual elements.
 type Indexable interface {

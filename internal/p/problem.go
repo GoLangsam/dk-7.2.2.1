@@ -28,7 +28,7 @@ type P struct {
 // Options (if any) must be preceded by an empty line.
 //
 // The first line defines the primary items,
-// subsquent non-empty lines (if any) define (groups of) secondary items.
+// subsequent non-empty lines (if any) define (groups of) secondary items.
 //
 // The problem is ready to accept secondary items (if any)
 // and further options

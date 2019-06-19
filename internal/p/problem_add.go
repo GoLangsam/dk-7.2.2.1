@@ -60,7 +60,7 @@ func (a *P) AddOption(items ...string) *P {
 	}
 
 	a.AddMark(a.OptaS[c-1].Root-1, c)        // add trailing spacer
-	a.OptaS[c-1].Next = (c - 1) + len(items) // update preceeding spacer
+	a.OptaS[c-1].Next = (c - 1) + len(items) // update preceding spacer
 
 	return a
 }

@@ -4,10 +4,6 @@
 
 package x
 
-import (
-	"log"
-)
-
 // ===========================================================================
 
 // Opta represents an option - somthing one can 'optare' (=choose) from.
@@ -78,7 +74,7 @@ func (a OptaS) AppendNull() OptaS {
 // AppendMark appends a spacer. The mark must be < 0.
 func (a OptaS) AppendMark(mark, prev Index) OptaS {
 	if !(mark < 0) {
-		log.Panic("mark must be negative!")
+		die("mark must be negative!")
 	}
 
 	return append(a, Opta{Item: Item{Prev: prev}, Root: mark})

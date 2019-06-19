@@ -6,8 +6,6 @@
 package p
 
 import (
-	"log"
-
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m"
 )
 
@@ -50,7 +48,7 @@ func Problem(lines ...[]string) *P {
 	}
 
 	if cap == 0 {
-		log.Panic("Problem: need some items!")
+		die("Problem: need some items!")
 	}
 
 	a := P{m.NewMatrix(cap)} // make new problem matrix
@@ -85,7 +83,7 @@ func Problem(lines ...[]string) *P {
 func Items(items ...string) *P {
 	N := len(items)
 	if N < 1 {
-		log.Panic("Items: need one item - at least!")
+		die("Items: need one item - at least!")
 	}
 
 	cap := N + 2             // allocate two more: for primary and secondary roots

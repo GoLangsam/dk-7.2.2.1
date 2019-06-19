@@ -6,7 +6,6 @@ package p
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
@@ -22,7 +21,7 @@ func (a *P) AddItems(items ...string) *P {
 	}
 
 	if len(a.ItemS) != len(a.OptaS) {
-		log.Panic("Cannot add any more items: options have been added already!")
+		die("Cannot add any more items: options have been added already!")
 	}
 
 	root := x.Index(len(a.ItemS)) // here the root will be.
@@ -54,7 +53,7 @@ func (a *P) AddOption(items ...string) *P {
 
 	for i, name := range items {
 		if prev, ok := seen[name]; ok {
-			log.Panic(fmt.Sprintf("AddOption: duplicate item `%v`: first seen at %v, now at %v!", name, prev, i))
+			die(fmt.Sprintf("AddOption: duplicate item `%v`: first seen at %v, now at %v!", name, prev, i))
 		}
 		seen[name] = i
 

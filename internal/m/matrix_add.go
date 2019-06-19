@@ -4,6 +4,10 @@
 
 package m
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+)
+
 // ===========================================================================
 
 // AddList appends a root for a new itemlist rooted at `root`.
@@ -12,7 +16,7 @@ func (a *M) AddList(root int) {
 	var name string
 
 	if len(a.NameS) == 0 { // only for first root - name is intentionally empty
-		a.Names.Dict.LearnOnce(name, root)
+		a.Names.Dict.LearnOnce(x.Name(name), root)
 	} else {
 		name = tab
 	}
@@ -28,7 +32,7 @@ func (a *M) AddList(root int) {
 // AddItem appends a named item to the itemlist rooted at `root`.
 func (a *M) AddItem(name string, root int) {
 
-	a.Names.Dict.LearnOnce(name, len(a.ItemS))
+	a.Names.Dict.LearnOnce(x.Name(name), len(a.ItemS))
 	a.Names.NameS = a.Names.NameS.AppendName(name)
 
 	a.Items.ItemS = a.Items.ItemS.AppendItem(root)

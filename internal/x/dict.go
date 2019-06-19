@@ -12,13 +12,13 @@ import (
 // ===========================================================================
 
 // Dict maps any Name to its Index.
-type Dict map[string]Index
+type Dict map[Name]Index
 
 // ===========================================================================
 
 // LearnOnce registers some name and its index
 // and panics iff such is already known.
-func (a Dict) LearnOnce(name string, index Index) Dict {
+func (a Dict) LearnOnce(name Name, index Index) Dict {
 	if i, ok := a[name]; ok {
 		log.Panic(fmt.Sprintf("Dict: name `%v` is duplicate - first seen at %v - now at %v!", name, i, index))
 	}
@@ -29,7 +29,7 @@ func (a Dict) LearnOnce(name string, index Index) Dict {
 
 // MustKnow returns the index for a given name
 // and panics iff such is not yet known.
-func (a Dict) MustKnow(name string) Index {
+func (a Dict) MustKnow(name Name) Index {
 	i, ok := a[name]
 	if !ok {
 		log.Panic(fmt.Sprintf("Dict: name `%v` is unknown!", name))

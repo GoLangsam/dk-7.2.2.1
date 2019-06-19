@@ -44,7 +44,7 @@ func (a *D) Choice() (here Index) {
 	Size := len(a.OptaS) // larger than anything we'll find.
 	root := &a.ItemS[0]
 
-	if root.Next == root {
+	if root.Next == 0 {
 		panic("Choice called on empty list!")
 	}
 

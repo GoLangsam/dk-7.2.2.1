@@ -25,7 +25,7 @@ func NewMatrix(cap int) *M {
 	m := M{
 		x.Names{
 			make([]x.Name, 0, cap),
-			make(map[string]x.Index, cap),
+			make(map[x.Name]x.Index, cap),
 		},
 		x.Items{
 			make([]x.Item, 0, cap),

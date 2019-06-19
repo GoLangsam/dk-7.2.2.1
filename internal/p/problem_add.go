@@ -7,6 +7,8 @@ package p
 import (
 	"fmt"
 	"log"
+
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
 
 // ===========================================================================
@@ -56,7 +58,7 @@ func (a *P) AddOption(items ...string) *P {
 		}
 		seen[name] = i
 
-		a.AddCell(a.MustKnow(name)) // append to Column(name-Index)
+		a.AddCell(a.MustKnow(x.Name(name))) // append to Column(name-Index)
 	}
 
 	a.AddMark(a.OptaS[c-1].Root-1, c)        // add trailing spacer

@@ -36,7 +36,7 @@ X2: // [Enter level l = a.Index]
 
 X5: // [Try x[l].]
 	v = a.Stack[a.Index] // a.Stack.Pop()
-	if v.Root == c {
+	if v == c {
 		goto X7 // (we've tried all options for i).
 	} // Otherwise set
 	a.DoCoverOthers(v) // Inline ========================================

@@ -7,3 +7,14 @@
 
 [dk]()-[7.2.2.1]() provides package [dl]() - what else ;-)
 
+---
+Your suggestions, remarks, questions and/or contributions are welcome ;-)
+
+---
+## Think deep - code happy - be simple - see clear :-)
+
+---
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/GoLangsam/dk-7.2.2.1/badge.svg?style=beer-square)](https://beerpay.io/GoLangsam/dk-7.2.2.1)  [![Beerpay](https://beerpay.io/GoLangsam/dk-7.2.2.1/make-wish.svg?style=flat-square)](https://beerpay.io/GoLangsam/dk-7.2.2.1?focus=wish)

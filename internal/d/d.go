@@ -5,72 +5,106 @@
 package d
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1/internal/m"
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+	"github.com/GoLangsam/container/oneway/drum"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
-type D struct {
-	Items // represents the items
-	Optas // represents the item-headers and the (spaced) options
-	Index // represents the Level, the depth of recursion
-	Stack // represents the Constellation
-	Drum  // represents the Updatecounter
-	On    // represents the plug-in functions: what to do when
+func SetVerboseM(v bool) {
+	m.SetVerbose(v)
 }
 
-// New returns a fresh Dancer
-// based on data cloned from the given problem Matrix.
-func New(M *m.M) D {
-	d := D{
-		Items: M.Items,
-		Optas: M.Optas,
-		Stack: x.NewStack(len(M.ItemS)), // len(M.ItemS) == -M.OptaS[0].Root,
-		Drum:  x.NewDrum("UpOptaS", len(M.OptaS)),
-	} // can dance
-	d.On.Here = d.Choice
-	return d
+func GetVerboseM() bool {
+	return m.GetVerbose()
+}
+
+func SetVerboseX(v bool) {
+	x.SetVerbose(v)
+}
+
+func GetVerboseX() bool {
+	return x.GetVerbose()
 }
 
 // ===========================================================================
 
-// Choice returns the index of a primary Item - its Root is index for Dance(i).
+// CellS buffers visited cells for backtracking.
+type CellS []x.Index
+
+// ===========================================================================
+
+// L consolidates local data for backtracking
+// and may be visited by On actions.
 //
-// It panics iff the list rooted at ItemS[0] is empty.
-// TODO: DK Version for AlgX - put elsewhere !!!
-func (a *D) Choice() (here Index) {
-
-	Size := Index(len(a.OptaS)) // larger than anything we'll find.
-	root := &a.ItemS[0]
-
-	if root.Next == 0 {
-		panic("Choice called on empty list!")
-	}
-
-	var size Index
-	for curr := root.Next; curr != 0; curr = a.ItemS[curr].Next {
-		size = a.OptaS[curr].Root
-		// TODO: the "non-sharp/sharp preference"-Heuristics
-		// if a.NameS[curr] does/doesn't start with `#` {
-		//	size = size + len(a.Optas.MarkS) - 1 // #-of-options
-		// }
-		/*
-			if size == 0 {
-				here, found = -1, false
-				break
-			}
-		*/
-		if size < Size {
-			Size = size
-			here = curr
-			//	found = true
-		}
-	}
-	/*
-		if a.logChoice { // ... we may show it
-			fmt.Println("Chosen:", tab, here, tab, found, tab)
-		}
-	*/
-	return
+// Note: Values depend on the algorithm!
+type L struct {
+	x.Index // the level - the depth of recursion
+	CellS   // the cell visited per level - compose the solution
+	// Note: cell's *Item is useful to present some solution!
 }
+
+// ===========================================================================
+
+type D struct {
+	m.M                  // the problem Matrix
+	*L                   // the local variables of the Dancer - for visitors
+	*drum.Drum           // the update Drum - incremented in DoHide
+	*On                  // the plug-in functions: what to do when
+	tacher               // can do and reCover
+	curr       []x.Index // partial solution to begin with
+}
+
+// ===========================================================================
+
+// New returns a fresh Dancer
+// based on the given problem Matrix.
+func newD(M func() m.M, useKind, useDrum bool) *D {
+	a := D{M: M(), On: &On{}}
+	if useDrum {
+		a.Drum = drum.NewDrum("UpOptaS", len(a.M.OptaS))
+	}
+
+	a.curr = []x.Index{}
+
+	if useKind {
+		tach := tachX{tach{a.ItemS, a.OptaS, a.Drum, &a.On.Leaf}}
+		a.tacher = tach
+		a.choose = tach.Next
+	} else {
+		tach := tachX{tach{a.ItemS, a.OptaS, a.Drum, &a.On.Leaf}}
+		a.tacher = tach
+		a.choose = tach.Next
+	}
+
+	a.L = &L{CellS: make([]x.Index, len(a.M.ItemS))} // sure this is large enough
+
+	return &a
+}
+
+// ===========================================================================
+
+// Search is what a Searcher is busy doing
+// after OnInit and before OnDone.
+func (a *D) Search(from ...x.Index) {
+	a.On.Init.Do()
+	a.SearchFrom(from)
+	a.On.Done.Do()
+}
+
+// ===========================================================================
+
+// SearchFrom is what a Searcher is busy doing
+// after winding down to from and
+// before rewinding back from from
+// so he may try again from elsewhere.
+func (a *D) SearchFrom(from []x.Index) {
+	a.curr = from
+	//a.doWind()
+	a.On.search.Do()
+	//a.reWind()
+	a.curr = []x.Index{}
+}
+
+// ===========================================================================

@@ -5,15 +5,17 @@
 package d
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
-func (a *D) DoCoverOthers(vi Index) {
-	var hi Index // some option adjacent to vi - think: horizontal
-	var hO *Opta // OptaS[di]
-	var i Index  // DoCover(i): i or hO.Root // Change variable in order to ease inlining
+func (a tachX) DoCoverOthers(vi x.Index) {
+	var (
+		hi x.Index // some option adjacent to vi - think: horizontal
+		hO *x.Opta // OptaS[di]
+		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
+	)
 
 	{
 
@@ -40,10 +42,12 @@ func (a *D) DoCoverOthers(vi Index) {
 
 // ===========================================================================
 
-func (a *D) DoCover(i Index) {
-	var iI *Item     // cover: ItemS[i]
-	var il, ir Index // cover: left, right
-	var p Index      // cover:: DoHide(p)
+func (a tachX) DoCover(i x.Index) {
+	var (
+		iI     *x.Item // cover: ItemS[i]
+		il, ir x.Index // cover: left, right
+		p      x.Index // cover:: DoHide(p)
+	)
 
 	{
 		{
@@ -70,10 +74,12 @@ func (a *D) DoCover(i Index) {
 // ===========================================================================
 
 // DoHide p.Index
-func (a *D) DoHide(p Index) {
-	var qi Index     // hide: index
-	var qO *Opta     // hide: OptaS[qi]
-	var qu, qd Index // hide: up, down
+func (a tachX) DoHide(p x.Index) {
+	var (
+		qi     x.Index // hide: index
+		qO     *x.Opta // hide: OptaS[qi]
+		qu, qd x.Index // hide: up, down
+	)
 
 	{
 		{
@@ -93,19 +99,18 @@ func (a *D) DoHide(p Index) {
 					//  a.OptaS.DeTach(qO) =======================================
 					qu = qO.Prev
 					qd = qO.Next
-					a.OptaS[qu].Next = qd
 					a.OptaS[qd].Prev = qu
+					a.OptaS[qu].Next = qd
 
 					a.OptaS[qO.Root].Root--
 					qi++
 
 					// Beg of Update-Count =======================================
-					a.Drum.Cnt++ // count update per Opta
-					if a.Drum.UseMap {
-						a.Drum.Map[qi]++
+					if a.Drum != nil {
+						a.Drum.Beat(int(qi)) // count update per Opta
 					}
-					if a.On.Leaf != nil { // count update per Level
-						a.On.Leaf(x.Index(len(a.Stack)))
+					if a.It != nil && *a.It != nil {
+						(*a.It).Do() // count updates
 					}
 					// End of Update-Count =======================================
 				}

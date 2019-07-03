@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package p
+package dl
 
 import "log"
 
@@ -32,9 +32,4 @@ func qqf(format string, args ...interface{}) {
 	if verbose {
 		sef(format, args...)
 	}
-}
-
-func init() {
-	log.SetFlags(0)
-	log.SetPrefix("")
 }

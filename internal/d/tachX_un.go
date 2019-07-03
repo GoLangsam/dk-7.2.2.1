@@ -4,12 +4,18 @@
 
 package d
 
+import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
+)
+
 // ===========================================================================
 
-func (a *D) UnCoverOthers(vi Index) {
-	var hi Index // some option adjacent to vi - think: horizontal
-	var hO *Opta // OptaS[di]
-	var i Index  // UnCover(i): i or hO.Root // Change variable in order to ease inlining
+func (a tachX) UnCoverOthers(vi x.Index) {
+	var (
+		hi x.Index // some option adjacent to vi - think: horizontal
+		hO *x.Opta // OptaS[di]
+		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
+	)
 
 	{
 
@@ -36,10 +42,12 @@ func (a *D) UnCoverOthers(vi Index) {
 
 // ===========================================================================
 
-func (a *D) UnCover(i Index) {
-	var iI *Item     // cover: ItemS[i]
-	var il, ir Index // cover: left, right
-	var p Index      // cover: UnHide(p)
+func (a tachX) UnCover(i x.Index) {
+	var (
+		iI     *x.Item // cover: ItemS[i]
+		il, ir x.Index // cover: left, right
+		p      x.Index // cover:: DoHide(p)
+	)
 
 	{
 		{
@@ -67,10 +75,12 @@ func (a *D) UnCover(i Index) {
 // ===========================================================================
 
 // UnHide p.Index
-func (a *D) UnHide(p Index) {
-	var qi Index     // hide: index
-	var qO *Opta     // hide: OptaS[qi]
-	var qu, qd Index // hide: up, down
+func (a tachX) UnHide(p x.Index) {
+	var (
+		qi     x.Index // hide: index
+		qO     *x.Opta // hide: OptaS[qi]
+		qu, qd x.Index // hide: up, down
+	)
 
 	{
 		{
@@ -90,8 +100,8 @@ func (a *D) UnHide(p Index) {
 					//  a.OptaS.ReTach(qq) =======================================
 					qu = qO.Prev
 					qd = qO.Next
-					a.OptaS[qu].Next = qi
 					a.OptaS[qd].Prev = qi
+					a.OptaS[qu].Next = qi
 
 					a.OptaS[qO.Root].Root++
 					qi--

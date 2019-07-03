@@ -5,26 +5,22 @@
 package d
 
 import (
+	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
-// Do returns a Do (which wraps matrix data and the given do-function and)
-// which provides iterating methods ForEach.... or some conditional DoIf.
-func (a *D) Do(f func(x.Index)) x.Do {
-	return x.Do{
-		&a.Items,
-		&a.Optas,
-		a.CellS,
-		f,
+func AlgorithmX(M func() m.M, useKind, useDrum bool) *D {
+	a := newD(M, useKind, useDrum)
+
+	mainS := make([]x.Index, len(a.M.ItemS)) // sure this is large enough
+
+	a.On.search = func() {
+		a.L.algorithmX(a.tacher, a.On, &a.ItemS[0], a.On.choose, a.OptaS, mainS)
 	}
-}
 
-// ===========================================================================
-
-func (a *D) DoIf(f func(x.Index)) *x.DoIf {
-	return &x.DoIf{Do: x.Do{Do: f}}
+	return a
 }
 
 // ===========================================================================

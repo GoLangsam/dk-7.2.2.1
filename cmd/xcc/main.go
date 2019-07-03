@@ -6,19 +6,20 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"strconv"
+	"unsafe"
 
 	"github.com/GoLangsam/dk-7.2.2.1"
 	"github.com/GoLangsam/dk-7.2.2.1/data"
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 const tab = "\t"
 
 func main() {
 
-	_ = data.SmallMatrix()
-
-	m := data.SmallMatrixM()
+	m := dl.Problem("SmallMatrix", data.SmallMatrix()...)
 
 	if false {
 		fmt.Println(len(m.NameS), tab, m.NameS)
@@ -56,15 +57,48 @@ func main() {
 		fmt.Println()                                  // .
 	}
 
-	{
-		m := dl.Problem(data.FourQueens()...).Matrix()
+	if false {
+		N := 80 // TODO: N = 80 is the max! Beyond => index overflow
+		name := strconv.Itoa(N) + "-Queens"
+		M := func() dl.Matrix { return dl.Problem(name, data.NQueens(N)...) }
+		m := M()
 		fmt.Println(len(m.NameS), tab, m.NameS)
-		fmt.Println(len(m.ItemS), tab, m.ItemS)
-		fmt.Println(len(m.OptaS), tab, m.OptaS)
+		fmt.Println("Size:", tab, reflect.TypeOf(m).Size(), unsafe.Sizeof(m))
+		s := int(unsafe.Sizeof(m.ItemS[0]))
+		fmt.Println("Size ItemS:", tab, reflect.TypeOf(m.ItemS).Size(), len(m.ItemS), len(m.ItemS)*s)
+		s = int(unsafe.Sizeof(m.OptaS[0]))
+		fmt.Println("Size OptaS:", tab, reflect.TypeOf(m.OptaS).Size(), len(m.OptaS), len(m.OptaS)*s)
+	}
 
-		dl.Search(m)
-		// dl.Search(data.FourQueens())
-		fmt.Println("Search finished!")
+	if true {
+		for _, d := range []struct {
+			name string
+			data [][]string
+		}{
+			{name: "SmallMatrix", data: data.SmallMatrix()},
+			{name: "Sudoku 29a", data: data.Sudoku(data.Hint29a())},
+			//{name: "Sudoku 29b", data: data.Sudoku(data.Hint29b())},
+			//{name: "Sudoku 29c", data: data.Sudoku(data.Hint29c())},
+		} {
+
+			M := func() dl.Matrix { return dl.Problem(d.name, d.data...) }
+			for _, recur := range []bool{true, false} {
+				dl.Search(M, recur)
+}
+			fmt.Println()
+		}
+	}
+
+	if false {
+		for N := 1; N < 14; N++ {
+
+			name := strconv.Itoa(N) + "-Queens"
+			for _, recur := range []bool{true, false} {
+				M := func() dl.Matrix { return dl.Problem(name, data.NQueens(N)...) }
+				dl.Search(M, recur)
+			}
+			fmt.Println()
+		}
 	}
 
 }

@@ -2,18 +2,42 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package p
+package m
 
 import (
 	"fmt"
 
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
+func getCap(lines ...[]string) (capI, capO int) {
+	var isOption bool
+
+	for _, line := range lines {
+		size := len(line)
+		if size == 0 {
+			isOption = true
+			continue
+		}
+
+		if isOption {
+			capO += size + 1 // one more for root
+		} else {
+			capI += size + 1 // one more for root
+		}
+
+	}
+	capO += capI // + Items
+	capO += 1    // + trailing spacer
+	return
+}
+
+// ===========================================================================
+
 // AddLines returns the extended problem - thus calls may be chained.
-func (a *P) addLines(lines ...[]string) *P {
+func (a *p) addLines(lines ...[]string) *p {
 	var isOption bool
 
 	for _, line := range lines {
@@ -37,7 +61,7 @@ func (a *P) addLines(lines ...[]string) *P {
 // AddItems returns the extended problem - thus calls may be chained.
 //
 // Panics iff AddOptions had been called before (with non-empty args).
-func (a *P) AddItems(items ...string) *P {
+func (a *p) AddItems(items ...string) *p {
 	if len(items) == 0 {
 		return a
 	}
@@ -61,7 +85,7 @@ func (a *P) AddItems(items ...string) *P {
 }
 
 // AddOption returns the extended problem - thus calls may be chained.
-func (a *P) AddOption(items ...string) *P {
+func (a *p) AddOption(items ...string) *p {
 	if len(items) == 0 {
 		return a
 	}

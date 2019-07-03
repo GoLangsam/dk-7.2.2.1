@@ -5,26 +5,28 @@
 package d
 
 import (
+	"github.com/GoLangsam/container/oneway/drum"
+	"github.com/GoLangsam/do"
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
-// Do returns a Do (which wraps matrix data and the given do-function and)
-// which provides iterating methods ForEach.... or some conditional DoIf.
-func (a *D) Do(f func(x.Index)) x.Do {
-	return x.Do{
-		&a.Items,
-		&a.Optas,
-		a.CellS,
-		f,
-	}
+type tach struct {
+	x.ItemS    // the items
+	x.OptaS    // the item-headers and the (spaced) options
+	*drum.Drum // the update Drum - incremented in DoHide
+	*do.It     // the update action
 }
 
-// ===========================================================================
+// TachX implements d.Tacher.
+type tachX struct {
+	tach
+}
 
-func (a *D) DoIf(f func(x.Index)) *x.DoIf {
-	return &x.DoIf{Do: x.Do{Do: f}}
+// TachC implements d.Tacher.
+type tachC struct {
+	tach
 }
 
 // ===========================================================================

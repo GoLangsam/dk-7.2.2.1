@@ -15,7 +15,8 @@ import (
 //
 // Note: Do for a M wraps an empty stack.
 func (a *M) Do(f func(x.Index)) x.Do {
-	return x.Do{&a.Items, &a.Optas, &x.Stack{}, f}
+	stack := []x.Index{}
+	return x.Do{&a.Items, &a.Optas, stack, f}
 }
 
 // ===========================================================================

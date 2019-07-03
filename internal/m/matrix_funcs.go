@@ -7,7 +7,7 @@ package m
 import (
 	"fmt"
 
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all You need
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================

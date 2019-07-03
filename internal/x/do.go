@@ -19,7 +19,7 @@ package x
 type Do struct {
 	*Items
 	*Optas
-	*Stack
+	Stack []Index
 	Do func(Index)
 }
 

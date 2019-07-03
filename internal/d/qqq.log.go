@@ -4,7 +4,7 @@
 
 //go:pattern "github.com/GoLangsam/do/qqq/qqq.log.go" 
 
-package m
+package d
 
 import "log"
 

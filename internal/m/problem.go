@@ -2,11 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package p allows to build a problem and to obtain its matrix representation.
-package p
+package m
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1/internal/m"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
@@ -14,8 +13,8 @@ import (
 // P represents a problem under construction.
 //
 // Note: The null value is NOT useful!
-type P struct {
-	*m.M // (a pointer to) the matrix.
+type p struct {
+	*M // (a pointer to) the matrix.
 }
 
 // ===========================================================================
@@ -36,22 +35,20 @@ type P struct {
 // or iff some item has an empty string as its name
 // or iff some option refers to an item name more than once
 // or iff there are no items.
-func Problem(lines ...[]string) *P {
-	var cap int
-
-	for _, line := range lines {
-		size := len(line)
-		if size == 0 {
-			break
-		}
-		cap += size + 1 // one more for root
-	}
-
-	if cap == 0 {
+func Problem(name string, lines ...[]string) *p {
+	capI, capO := getCap(lines...)
+	if capI == 0 {
 		die("Problem: need some items!")
 	}
 
-	a := P{m.NewMatrix(cap)} // make new problem matrix
+	a := p{&M{
+		lines,
+		x.Name(name),
+		x.Names{make([]x.Name, 0, capI), make(map[x.Name]x.Index, capI)},
+		x.Items{make([]x.Item, 0, capI), []x.Index{}},
+		x.Optas{make([]x.Opta, 0, capO), []x.Index{}},
+	}} // make new problem matrix
+
 	return (&a).addLines(lines...)
 }
 
@@ -64,14 +61,21 @@ func Problem(lines ...[]string) *P {
 //
 // It panics iff some duplicate item name is encountered,
 // or iff some item has an empty string as its name.
-func Items(items ...string) *P {
+func Items(name string, items ...string) *p {
 	N := len(items)
 	if N < 1 {
 		die("Items: need one item - at least!")
 	}
 
-	cap := N + 2             // allocate two more: for primary and secondary roots
-	a := P{m.NewMatrix(cap)} // make new problem matrix
+	capI := N + 2             // allocate two more: for primary and secondary roots
+	capO := capI * capI
+	a := p{&M{
+		[][]string{items},
+		x.Name(name),
+		x.Names{make([]x.Name, 0, capI), make(map[x.Name]x.Index, capI)},
+		x.Items{make([]x.Item, 0, capI), []x.Index{}},
+		x.Optas{make([]x.Opta, 0, capO), []x.Index{}},
+	}} // make new problem matrix
 
 	a.AddItems(items...)
 
@@ -81,7 +85,7 @@ func Items(items ...string) *P {
 // ===========================================================================
 
 // Matrix returns (a pointer to) the matrix.
-func (a *P) Matrix() *m.M {
+func (a *p) Matrix() *M {
 	return a.M
 }
 

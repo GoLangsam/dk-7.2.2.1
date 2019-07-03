@@ -4,13 +4,10 @@
 
 package data
 
-import (
-	"github.com/GoLangsam/dk-7.2.2.1"
-)
+// SmallMatrix returns the small problem
+func SmallMatrix() [][]string {
 
-func SmallMatrix() dl.Matrix {
-
-	return dl.Problem([][]string{
+	return [][]string{
 		{"a", "b", "c", "d", "e", "f", "g"},
 		{},
 		{"c", "e"},
@@ -19,5 +16,5 @@ func SmallMatrix() dl.Matrix {
 		{"a", "d", "f"},
 		{"b", "g"},
 		{"d", "e", "g"},
-	}...).Matrix()
+	}
 }

@@ -5,26 +5,27 @@
 package data
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1"
+	"github.com/GoLangsam/do/id"
 )
 
-// NQueensR returns 'only' the rows as primary.
-func NQueensR(N int) dl.Matrix {
-	return dl.Problem(nQueens(N, true)...).Matrix()
+// NQueens returns a N-Queens problem
+// where both rows and ranks are primary.
+func NQueens(N int) (lines [][]string) {
+	return nQueens(N, false)
 }
 
-// NQueens returns the N Queens problem matrix.
-func NQueens(N int) dl.Matrix {
-	return dl.Problem(nQueens(N, false)...).Matrix()
+// NQueensR returns a N-Queens problem
+// where 'only' the rows are primary.
+func NQueensR(N int) (lines [][]string) {
+	return nQueens(N, true)
 }
 
-// nQueens returns 'only' the rows
 func nQueens(N int, onlyR bool) (lines [][]string) {
 
-	var r = IDs("R-", N)     // Ranks
-	var f = IDs("F-", N)     // Files
-	var a = IDs("A-", 2*N-1) // DiagA
-	var b = IDs("B-", 2*N-1) // DiagB
+	var r = id.S("R-", N)     // Ranks
+	var f = id.S("F-", N)     // Files
+	var a = id.S("A-", 2*N-1) // DiagA
+	var b = id.S("B-", 2*N-1) // DiagB
 
 	if onlyR {
 		lines = append(lines, r)
@@ -38,9 +39,13 @@ func nQueens(N int, onlyR bool) (lines [][]string) {
 
 	lines = append(lines, []string{})
 
+	var ai, bi int // index for Diags
+
 	for fi := range f {
 		for ri := range r {
-			lines = append(lines, []string{r[ri], f[fi], a[fi+ri], b[N-1-fi+ri]})
+			ai = fi + ri
+			bi = N - 1 - fi + ri
+			lines = append(lines, []string{r[ri], f[fi], a[ai], b[bi]})
 		}
 	}
 	return

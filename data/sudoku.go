@@ -4,6 +4,10 @@
 
 package data
 
+import (
+	"github.com/GoLangsam/do/id"
+)
+
 /*
 Sodoku:
 
@@ -40,10 +44,10 @@ func Sudoku(hint SudokuHint) [][]string {
 	const N = 9 // Size of sudoku square
 	const D = 9 // No of different digits in sudoku square
 
-	plcs := IDs("P-", N) // Place
-	rows := IDs("R-", N) // Rows
-	cols := IDs("C-", N) // Cols
-	blks := IDs("B-", N) // Blocks
+	plcs := id.S("P-", N) // Place
+	rows := id.S("R-", N) // Rows
+	cols := id.S("C-", N) // Cols
+	blks := id.S("B-", N) // Blocks
 
 	p := [][]string{}
 	r := [][]string{}
@@ -51,19 +55,19 @@ func Sudoku(hint SudokuHint) [][]string {
 	b := [][]string{}
 
 	for _, plc := range plcs {
-		p = append(p, IDs(plc+"-", N))
+		p = append(p, id.S(plc+"-", N))
 	}
 
 	for _, row := range rows {
-		r = append(r, IDs(row+"V=", D))
+		r = append(r, id.S(row+"V=", D))
 	}
 
 	for _, col := range cols {
-		c = append(c, IDs(col+"V=", D))
+		c = append(c, id.S(col+"V=", D))
 	}
 
 	for _, blk := range blks {
-		b = append(b, IDs(blk+"V=", D))
+		b = append(b, id.S(blk+"V=", D))
 	}
 
 	itemS := []string{}

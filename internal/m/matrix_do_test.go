@@ -8,14 +8,15 @@ import (
 	"fmt"
 
 	"github.com/GoLangsam/dk-7.2.2.1/data"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
 )
 
 // ===========================================================================
 
 func Example_forEachNext() {
-	a := data.SmallMatrix()
+	a := data.SmallMatrixM()
 
-	showName := func(i int) { fmt.Print(" ", a.NameS[i]) }
+	showName := func(i x.Index) { fmt.Print(" ", a.NameS[int(i)]) }
 
 	for _, root := range a.Items.MarkS {
 		a.Do(showName).ForEachNext(root)
@@ -27,9 +28,9 @@ func Example_forEachNext() {
 }
 
 func Example_forEachPrev() {
-	a := data.SmallMatrix()
+	a := data.SmallMatrixM()
 
-	showName := func(i int) { fmt.Print(" ", a.NameS[i]) }
+	showName := func(i x.Index) { fmt.Print(" ", a.NameS[int(i)]) }
 
 	for _, root := range a.Items.MarkS {
 		a.Do(showName).ForEachPrev(root)
@@ -43,9 +44,9 @@ func Example_forEachPrev() {
 // ===========================================================================
 
 func Example_forEachLineNext() {
-	a := data.SmallMatrix()
+	a := data.SmallMatrixM()
 
-	showName := func(i int) { fmt.Print(" ", a.NameS[a.OptaS[i].Root]) }
+	showName := func(i x.Index) { fmt.Print(" ", a.NameS[a.OptaS[int(i)].Root]) }
 
 	for i, root := range a.Optas.MarkS {
 		fmt.Print("#", i, ":") //, a.OptaS[root].Prev, a.OptaS[root].Next)
@@ -64,9 +65,9 @@ func Example_forEachLineNext() {
 }
 
 func Example_forEachLinePrev() {
-	a := data.SmallMatrix()
+	a := data.SmallMatrixM()
 
-	showName := func(i int) { fmt.Print(" ", a.NameS[a.OptaS[i].Root]) }
+	showName := func(i x.Index) { fmt.Print(" ", a.NameS[a.OptaS[int(i)].Root]) }
 
 	for i, root := range a.Optas.MarkS {
 		fmt.Print("#", i, ":") //, a.OptaS[root].Prev, a.OptaS[root].Next)
@@ -87,7 +88,7 @@ func Example_forEachLinePrev() {
 /*
 
 func Example_forEachOptaPrev() {
-	a := data.SmallMatrix()
+	a := data.SmallMatrixM()
 
 	for _, root := range a.Items.MarkS {
 		if a.OptaS[root].Prev != 0 {

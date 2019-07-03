@@ -4,10 +4,6 @@
 
 package data
 
-import (
-	"github.com/GoLangsam/dk-7.2.2.1"
-)
-
 /*
 The 4 queens problem is just the task of covering
 	eight primary columns (R0,R1,R2,R3, F0, F1, F2, F3)
@@ -16,10 +12,9 @@ The 4 queens problem is just the task of covering
 	(A0,A1,A2,A3,A4,A5,A6, B0,B1,B2,B3,B4,B5,B6) corresponding to diagonals, given the sixteen rows
 */
 
-// FourQueens returns a handmade 4-Queen matrix.
-func FourQueens() dl.Matrix {
-
-	return dl.Problem([][]string{
+// FourQueens returns a handmade 4-Queen problem.
+func FourQueens() [][]string {
+	return [][]string{
 		{"R0", "R1", "R2", "R3", "F0", "F1", "F2", "F3"}, // Ranks & Files
 		{"A0", "A1", "A2", "A3", "A4", "A5", "A6"},       // Diagonals
 		{"B0", "B1", "B2", "B3", "B4", "B5", "B6"},       // Diagonals backward
@@ -43,6 +38,5 @@ func FourQueens() dl.Matrix {
 		{"R3", "F1", "A4", "B1"},
 		{"R3", "F2", "A5", "B2"},
 		{"R3", "F3", "A6", "B3"},
-	}...).Matrix()
-
+	}
 }

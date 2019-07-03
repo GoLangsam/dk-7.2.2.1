@@ -18,7 +18,7 @@ func main() {
 
 	_ = data.SmallMatrix()
 
-	m := data.SmallMatrix()
+	m := data.SmallMatrixM()
 
 	if false {
 		fmt.Println(len(m.NameS), tab, m.NameS)
@@ -57,7 +57,7 @@ func main() {
 	}
 
 	{
-		m := data.FourQueens()
+		m := dl.Problem(data.FourQueens()...).Matrix()
 		fmt.Println(len(m.NameS), tab, m.NameS)
 		fmt.Println(len(m.ItemS), tab, m.ItemS)
 		fmt.Println(len(m.OptaS), tab, m.OptaS)

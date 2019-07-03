@@ -35,8 +35,3 @@ func qqf(format string, args ...interface{}) {
 		sef(format, args...)
 	}
 }
-
-func init() {
-	log.SetFlags(0)
-	log.SetPrefix("")
-}

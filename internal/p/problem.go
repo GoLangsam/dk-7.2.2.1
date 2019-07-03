@@ -52,23 +52,7 @@ func Problem(lines ...[]string) *P {
 	}
 
 	a := P{m.NewMatrix(cap)} // make new problem matrix
-
-	var isOption bool
-	for _, line := range lines {
-		if len(line) == 0 {
-			isOption = true
-			continue
-		}
-
-		if isOption {
-			a.AddOption(line...)
-		} else {
-			a.AddItems(line...)
-		}
-
-	}
-
-	return &a
+	return (&a).addLines(lines...)
 }
 
 // ===========================================================================

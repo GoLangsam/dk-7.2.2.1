@@ -12,6 +12,28 @@ import (
 
 // ===========================================================================
 
+// AddLines returns the extended problem - thus calls may be chained.
+func (a *P) addLines(lines ...[]string) *P {
+	var isOption bool
+
+	for _, line := range lines {
+		if len(line) == 0 {
+			isOption = true
+			continue
+		}
+
+		if isOption {
+			a.AddOption(line...)
+		} else {
+			a.AddItems(line...)
+		}
+	}
+
+	return a
+}
+
+// ===========================================================================
+
 // AddItems returns the extended problem - thus calls may be chained.
 //
 // Panics iff AddOptions had been called before (with non-empty args).

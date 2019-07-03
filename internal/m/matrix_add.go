@@ -32,7 +32,10 @@ func (a *M) AddList(root x.Index) {
 // AddItem appends a named item to the itemlist rooted at `root`.
 func (a *M) AddItem(name string, root x.Index) {
 
-	a.Names.Dict.LearnOnce(x.Name(name), x.Index(len(a.ItemS)))
+	{
+		a.Names.Dict.LearnOnce(x.Name(name), x.Index(len(a.ItemS)))
+	}
+
 	a.Names.NameS = a.Names.NameS.AppendName(name)
 
 	a.Items.ItemS = a.Items.ItemS.AppendItem(root)
@@ -43,7 +46,9 @@ func (a *M) AddItem(name string, root x.Index) {
 // AddMark appends a spacer. Note: The mark should be < 0.
 func (a *M) AddMark(mark, prev x.Index) {
 
-	a.Optas.MarkS = a.Optas.MarkS.AppendMark(x.Index(len(a.OptaS)))
+	c := x.Index(len(a.OptaS)) // shall create a[c]
+
+	a.Optas.MarkS = a.Optas.MarkS.AppendMark(c)
 	a.Optas.OptaS = a.Optas.OptaS.AppendMark(mark, prev)
 }
 

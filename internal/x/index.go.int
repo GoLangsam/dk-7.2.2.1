@@ -7,4 +7,4 @@ package x
 // ===========================================================================
 
 // Index represents an offset in some array or slice.
-type Index = int16
+type Index = int

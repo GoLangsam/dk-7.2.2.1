@@ -6,8 +6,9 @@ package dl
 
 import (
 	"github.com/GoLangsam/container/oneway/drum"
-	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
 	"github.com/GoLangsam/do"
+
+	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
 )
 
 // ===========================================================================

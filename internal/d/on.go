@@ -5,8 +5,9 @@
 package d
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 	"github.com/GoLangsam/do"
+
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================

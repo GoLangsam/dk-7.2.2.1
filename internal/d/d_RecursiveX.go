@@ -13,6 +13,11 @@ import (
 
 func RecursiveX(M func() m.M, useKind, useDrum bool) *D {
 	a := newD(M, useKind, useDrum)
+	if useKind {
+		a.Name = "RecursiveC"
+	} else {
+		a.Name = "RecursiveX"
+	}
 
 	a.On.next = func(m x.Index) {
 		a.L.recurDance(a.tacher, a.On, m)

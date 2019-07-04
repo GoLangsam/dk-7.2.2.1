@@ -5,9 +5,10 @@
 package s
 
 import (
+	"github.com/GoLangsam/do"
+
 	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
-	"github.com/GoLangsam/do"
 )
 
 // ===========================================================================

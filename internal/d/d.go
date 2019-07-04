@@ -6,6 +6,7 @@ package d
 
 import (
 	"github.com/GoLangsam/container/oneway/drum"
+
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
@@ -50,6 +51,7 @@ type L struct {
 // ===========================================================================
 
 type D struct {
+	x.Name               // the name of the alorithm in use
 	m.M                  // the problem Matrix
 	*L                   // the local variables of the Dancer - for visitors
 	*drum.Drum           // the update Drum - incremented in DoHide

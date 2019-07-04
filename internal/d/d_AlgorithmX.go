@@ -13,6 +13,11 @@ import (
 
 func AlgorithmX(M func() m.M, useKind, useDrum bool) *D {
 	a := newD(M, useKind, useDrum)
+	if useKind {
+		a.Name = "AlgorithmC"
+	} else {
+		a.Name = "AlgorithmX"
+	}
 
 	mainS := make([]x.Index, len(a.M.ItemS)) // sure this is large enough
 

@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/GoLangsam/do"

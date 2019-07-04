@@ -5,8 +5,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/GoLangsam/do"
 
 	"github.com/GoLangsam/dk-7.2.2.1/data"

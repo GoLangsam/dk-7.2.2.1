@@ -72,11 +72,11 @@ func (a *p) AddItems(items ...string) *p {
 
 	root := x.Index(len(a.ItemS)) // here the root will be.
 	var name string               // empty name for main root.
-	a.AddList(root)               // add it to the matrix
+	a.addList(root)               // add it to the matrix
 
 	// push things in lockstep
 	for _, name = range items {
-		a.AddItem(name, root)
+		a.addItem(name, root)
 	}
 
 	// TODO: consider to set Prev & Next of a.OptaS[root] - currently unused.
@@ -91,7 +91,7 @@ func (a *p) AddOption(items ...string) *p {
 	}
 
 	if len(a.ItemS) == len(a.OptaS) { // add first trailing spacer
-		a.AddMark(-1, 0) // Note: DK starts marking with 0, and decrements. We start negative, using -1.
+		a.addMark(-1, 0) // Note: DK starts marking with 0, and decrements. We start negative, using -1.
 	}
 
 	c := x.Index(len(a.OptaS))               // shall create a.OptaS[c]
@@ -103,10 +103,10 @@ func (a *p) AddOption(items ...string) *p {
 		}
 		seen[name] = i
 
-		a.AddCell(a.MustKnow(x.Name(name))) // append to Column(name-Index)
+		a.addCell(a.MustKnow(x.Name(name))) // append to Column(name-Index)
 	}
 
-	a.AddMark(a.OptaS[c-1].Root-1, c)                 // add trailing spacer
+	a.addMark(a.OptaS[c-1].Root-1, c)                 // add trailing spacer
 	a.OptaS[c-1].Next = (c - 1) + x.Index(len(items)) // update preceding spacer
 
 	return a

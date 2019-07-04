@@ -5,13 +5,13 @@
 package m
 
 import (
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
 // AddList appends a root for a new itemlist rooted at `root`.
-func (a *M) AddList(root x.Index) {
+func (a *M) addList(root x.Index) {
 
 	var name string
 
@@ -30,7 +30,7 @@ func (a *M) AddList(root x.Index) {
 }
 
 // AddItem appends a named item to the itemlist rooted at `root`.
-func (a *M) AddItem(name string, root x.Index) {
+func (a *M) addItem(name string, root x.Index) {
 
 	{
 		a.Names.Dict.LearnOnce(x.Name(name), x.Index(len(a.ItemS)))
@@ -44,7 +44,7 @@ func (a *M) AddItem(name string, root x.Index) {
 }
 
 // AddMark appends a spacer. Note: The mark should be < 0.
-func (a *M) AddMark(mark, prev x.Index) {
+func (a *M) addMark(mark, prev x.Index) {
 
 	c := x.Index(len(a.OptaS)) // shall create a[c]
 
@@ -53,7 +53,7 @@ func (a *M) AddMark(mark, prev x.Index) {
 }
 
 // AddCell appends a cell to the (vertical) list rooted at item `root`.
-func (a *M) AddCell(root x.Index) {
+func (a *M) addCell(root x.Index) {
 
 	a.Optas.OptaS = a.Optas.OptaS.AppendOpta(root)
 }

@@ -13,18 +13,16 @@ import (
 func (a tachX) DoCoverOthers(vi x.Index) {
 	var (
 		hi x.Index // some option adjacent to vi - think: horizontal
-		hO *x.Opta // OptaS[di]
+		hO *x.Opta // OptaS[hi]
 		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
 	)
 
 	{
 
-		// Beg of DoCoverOthers ==========================================
+		// Beg of CoverOthers ==========================================
 		hi = vi + 1
 		for hi != vi {
-
 			hO = &a.OptaS[hi]
-
 			if hO.Root < 0 { // Spacer
 				hi = hO.Prev
 				continue
@@ -32,10 +30,9 @@ func (a tachX) DoCoverOthers(vi x.Index) {
 
 			i = hO.Root  // Change variable in order to ease inlining
 			a.DoCover(i) // Inline ========================================
-
 			hi++
 		}
-		// End of DoCoverOthers ==========================================
+		// End of CoverOthers ==========================================
 
 	}
 }
@@ -46,28 +43,25 @@ func (a tachX) DoCover(i x.Index) {
 	var (
 		iI     *x.Item // cover: ItemS[i]
 		il, ir x.Index // cover: left, right
-		p      x.Index // cover:: DoHide(p)
+		p      x.Index // cover: Hide(p)
 	)
 
 	{
-		{
 
-			// Beg of Cover ======================================================
-			for p = a.OptaS[i].Next; p != i; p = a.OptaS[p].Next {
-
-				a.DoHide(p) // Inline ========================================
-
-			}
-
-			iI = &a.ItemS[i]
-			//  a.ItemS.DeTach(iI) ===============================================
-			il = iI.Prev
-			ir = iI.Next
-			a.ItemS[il].Next = ir
-			a.ItemS[ir].Prev = il
-			// End of Cover ======================================================
+		// Beg of Cover ======================================================
+		for p = a.OptaS[i].Next; p != i; p = a.OptaS[p].Next {
+			a.DoHide(p) // Inline ========================================
 
 		}
+
+		iI = &a.ItemS[i]
+		//  a.ItemS.DeTach(iI) ===============================================
+		il = iI.Prev
+		ir = iI.Next
+		a.ItemS[il].Next = ir
+		a.ItemS[ir].Prev = il
+		// End of Cover ======================================================
+
 	}
 }
 
@@ -83,40 +77,38 @@ func (a tachX) DoHide(p x.Index) {
 
 	{
 		{
-			{
 
-				// Beg of Hide ===================================================
-				qi = p + 1
-				for qi != p { // ForEachOtherNext
+			// Beg of Hide ===================================================
+			qi = p + 1
+			for qi != p { // ForEachOtherNext
 
-					qO = &a.OptaS[qi]
+				qO = &a.OptaS[qi]
 
-					if qO.Root < 0 { // Spacer
-						qi = qO.Prev
-						continue
-					}
-
-					//  a.OptaS.DeTach(qO) =======================================
-					qu = qO.Prev
-					qd = qO.Next
-					a.OptaS[qd].Prev = qu
-					a.OptaS[qu].Next = qd
-
-					a.OptaS[qO.Root].Root--
-					qi++
-
-					// Beg of Update-Count =======================================
-					if a.Drum != nil {
-						a.Drum.Beat(int(qi)) // count update per Opta
-					}
-					if a.It != nil && *a.It != nil {
-						(*a.It).Do() // count updates
-					}
-					// End of Update-Count =======================================
+				if qO.Root < 0 { // Spacer
+					qi = qO.Prev
+					continue
 				}
-				// End of Hide ===================================================
 
+				//  a.OptaS.DeTach(qO) =======================================
+				qu = qO.Prev
+				qd = qO.Next
+				a.OptaS[qd].Prev = qu
+				a.OptaS[qu].Next = qd
+
+				a.OptaS[qO.Root].Root--
+				qi++
+
+				// Beg of Update-Count =======================================
+				if a.Drum != nil {
+					a.Drum.Beat(int(qi)) // count update per Opta
+				}
+				if a.It != nil && *a.It != nil {
+					(*a.It).Do() // count updates
+				}
+				// End of Update-Count =======================================
 			}
+			// End of Hide ===================================================
+
 		}
 	}
 }

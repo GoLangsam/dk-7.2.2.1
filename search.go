@@ -18,7 +18,7 @@ type Matrix = m.M
 
 // Problem wraps m.New - see there for detailed info.
 func Problem(name string, lines ...[]string) Matrix {
-	return *m.Problem(name, lines...).Matrix()
+	return m.Problem(name, lines...).Matrix()
 }
 
 // as in tees/cmd/NQueensR
@@ -30,9 +30,8 @@ func getOption(v, vg, rh, vd, vb, vc, vdd, vdg, vdf, vdc, vdl bool) do.Option {
 	options := []do.Option{}
 
 	if vg {
-		options = append(options,
-			// OnGoal(d.ShowGoal),
-		)
+		options = append(options) // OnGoal(d.ShowGoal),
+
 	}
 
 	if v {
@@ -73,8 +72,8 @@ func Search(M func() Matrix, recur bool) {
 	_, _, _, _, _, _ = v, vg, rh, vd, vb, vc
 	v = true
 	// vc = true
-	vd = true
-	vg = true // show Goals
+	// vd = true
+	// vg = true // show Goals
 	//vdg, vdf, vdc, vdl, vdd = vd, vd, vd, vd, vd // useMap
 	vdl, vdd = false, false // no updates map
 

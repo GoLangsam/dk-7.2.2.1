@@ -17,7 +17,7 @@ func AlgorithmX(M func() m.M, useKind, useDrum bool) *D {
 	mainS := make([]x.Index, len(a.M.ItemS)) // sure this is large enough
 
 	a.On.search = func() {
-		a.L.algorithmX(a.tacher, a.On, &a.ItemS[0], a.On.choose, a.OptaS, mainS)
+		a.L.algorithmX(a.tacher, a.On, &a.ItemS[0], a.On.choose, mainS)
 	}
 
 	return a

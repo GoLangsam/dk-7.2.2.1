@@ -16,7 +16,6 @@ import (
 func (l *L) recurTwirl(
 	d tacher,
 	on *On,
-	OptaS x.OptaS,
 	root *x.Item,
 	next chooser,
 ) {
@@ -24,14 +23,14 @@ func (l *L) recurTwirl(
 	if on.Skip != nil && on.Skip.Do() { // => X8 - skip level
 		return
 	}
-	if OptaS[0].Next == 0 { // => X8 (all items have been covered),
+	if root.Next == 0 { // => X8 (all items have been covered),
 		if on.Goal != nil {
 			on.Goal.Do()
 		} // we have a Solution!
 		return // >>>>>>>>>>
 	}
 	i := next(root)
-	if OptaS[i].Next == i { // => X7 - deadend
+	if l.optaS[i].Next == i { // => X7 - deadend
 		if on.Fail != nil {
 			on.Fail.Do()
 		} // we have a Dead end!

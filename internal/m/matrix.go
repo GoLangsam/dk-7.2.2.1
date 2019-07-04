@@ -27,7 +27,7 @@ type M struct {
 //
 // Note: The name-dictionary is read-only!
 // Only its pointer is copied.
-func (a *M) Clone() *M {
+func (a *M) Clone() M {
 	m := M{
 		a.lines,
 		a.Name,
@@ -36,7 +36,7 @@ func (a *M) Clone() *M {
 		a.Optas.Clone(),
 	}
 
-	return &m
+	return m
 }
 
 // ===========================================================================

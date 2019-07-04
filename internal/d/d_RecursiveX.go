@@ -15,10 +15,10 @@ func RecursiveX(M func() m.M, useKind, useDrum bool) *D {
 	a := newD(M, useKind, useDrum)
 
 	a.On.next = func(m x.Index) {
-		a.L.recurDance(a.tacher, a.On, a.OptaS, m)
+		a.L.recurDance(a.tacher, a.On, m)
 	} // for recursive version
 	a.On.down = func() {
-		a.L.recurTwirl(a.tacher, a.On, a.OptaS, &a.ItemS[0], a.On.choose)
+		a.L.recurTwirl(a.tacher, a.On, &a.ItemS[0], a.On.choose)
 	} // for recursive version
 
 	a.On.search = a.On.down

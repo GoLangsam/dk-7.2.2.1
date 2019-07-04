@@ -13,22 +13,15 @@ import (
 func (l *L) recurDance(
 	d tacher,
 	on *On,
-	OptaS x.OptaS,
-	c x.Index,
+	i x.Index,
 
-	) {
-
-	var ( 
-		v x.Index // some option under c - think: vertical
-	)
+) {
 
 	{
-		{
-			d.DoCover(c) // Inline ========================================
-		}
+		d.DoCover(i) // Inline ========================================
 	}
 
-	for v = OptaS[c].Next; v != c; v = OptaS[v].Next {
+	for v := l.optaS[i].Next; v != i; v = l.optaS[v].Next {
 
 		l.CellS[l.Index] = v // Remember cell
 		l.Index++            // Incr Level
@@ -36,14 +29,10 @@ func (l *L) recurDance(
 		on.down()            // Twirl
 		d.UnCoverOthers(v)   // Inline ========================================
 		l.Index--            // Decr Level
-
-
 	}
 
 	{
-		{
-			d.UnCover(c) // Inline ========================================
-		}
+		d.UnCover(i) // Inline ========================================
 	}
 
 }

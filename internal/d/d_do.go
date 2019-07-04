@@ -16,7 +16,7 @@ func (a *D) Do(f func(x.Index)) x.Do {
 	return x.Do{
 		&a.Items,
 		&a.Optas,
-		a.CellS,
+		a.CellS[:a.Index],
 		f,
 	}
 }

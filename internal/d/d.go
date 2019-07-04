@@ -30,19 +30,21 @@ func GetVerboseX() bool {
 
 // ===========================================================================
 
+// Cell represents a non-zero element of the matrix.
+type cell = x.Index
+
 // CellS buffers visited cells for backtracking.
-type CellS []x.Index
+type CellS []cell
 
 // ===========================================================================
 
 // L consolidates local data for backtracking
 // and may be visited by On actions.
-//
-// Note: Values depend on the algorithm!
 type L struct {
 	x.Index // the level - the depth of recursion
 	CellS   // the cell visited per level - compose the solution
 	// Note: cell's *Item is useful to present some solution!
+	optaS x.OptaS // the options
 }
 
 // ===========================================================================
@@ -78,7 +80,9 @@ func newD(M func() m.M, useKind, useDrum bool) *D {
 		a.choose = tach.Next
 	}
 
-	a.L = &L{CellS: make([]x.Index, len(a.M.ItemS))} // sure this is large enough
+	a.L = &L{CellS: make([]cell, len(a.M.ItemS)), // sure this is large enough
+		optaS: a.OptaS,
+	}
 
 	return &a
 }

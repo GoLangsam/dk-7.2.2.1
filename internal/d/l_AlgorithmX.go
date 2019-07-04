@@ -9,10 +9,9 @@ import (
 func (l *L) algorithmX(
 	d tacher,
 	on *On,
-	Root *x.Item,
-	Next chooser,
-	OptaS x.OptaS,
-	MainS []x.Index,
+	root *x.Item,
+	next chooser,
+	mainS []x.Index,
 ) {
 
 	var (
@@ -24,15 +23,15 @@ X2: // [Enter level] =============================================
 	if on.Skip != nil && on.Skip.Do() { // => X8 - skip level
 		goto X8 // >>>>>>>>>>
 	}
-	if OptaS[0].Next == 0 { // => X8 (all items have been covered),
+	if root.Next == 0 { // => X8 (all items have been covered),
 		if on.Goal != nil {
 			on.Goal.Do()
 		} // we have a Solution!
 		goto X8 // >>>>>>>>>>
 	}
-	i = Next(Root)             // X3. [Choose c]
+	i = next(root) // X3. [Choose c]
 
-	if OptaS[i].Next == i { // => X7 - deadend
+	if l.optaS[i].Next == i { // => X7 - deadend
 		if on.Fail != nil {
 			on.Fail.Do()
 		} // we have a Dead end!
@@ -42,11 +41,11 @@ X2: // [Enter level] =============================================
 	{
 		d.DoCover(i) // Inline ========================================
 	}
-	l.CellS[l.Index] = OptaS[i].Next // delayed a.Stack.Push()
+	l.CellS[l.Index] = l.optaS[i].Next // delayed a.Stack.Push()
 
 X5: // [Try x[l].] ===========================================================
 	v = l.CellS[l.Index] // a.Stack.Pop()
-	if v == i { // => X7 - no more
+	if v == i {          // => X7 - no more
 		goto X7 // (we've tried all options for i).
 	} // >>>>>>>>>>
 	d.DoCoverOthers(v) // Inline ========================================
@@ -57,8 +56,8 @@ X6: // [Try again] ===========================================================
 
 	d.UnCoverOthers(v) // Inline ========================================
 
-	i = OptaS[v].Root
-	l.CellS[l.Index] = OptaS[v].Next
+	i = l.optaS[v].Root
+	l.CellS[l.Index] = l.optaS[v].Next
 	goto X5 // >>>>>>>>>>
 X7: // [Backtrack] ===========================================================
 	{

@@ -10,7 +10,8 @@ import (
 
 // ===========================================================================
 
-// Next returns the index of a primary Item - its Root is index for Dance(i).
+// Next chooses the index of another primary Item
+// among the remaining items and returns it for Dance(i).
 //
 // Chosen is the first item with the smallest number of options.
 // (Sometimes called "MRV heuristic", or "S heuristic".)
@@ -18,8 +19,6 @@ import (
 // Next panics iff the list at root is empty
 // as no item can be found.
 func (a tach) Next(root *x.Item) (here x.Index) {
-
-	// qqq("Choosing", tab, here, tab, here.Prev, tab, here.Next)
 
 	Size := x.Index(len(a.OptaS)) // larger than anything we'll find.
 
@@ -43,7 +42,7 @@ func (a tach) Next(root *x.Item) (here x.Index) {
 		die("Choice found no item!")
 	}
 
-	qqq("Chosen:", tab, here, tab)
+	qqq("Chosen:", tab, here)
 	return
 }
 

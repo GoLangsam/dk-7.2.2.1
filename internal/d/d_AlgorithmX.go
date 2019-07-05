@@ -5,13 +5,35 @@
 package d
 
 import (
+	"github.com/GoLangsam/do"
+
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
 
-func AlgorithmX(M func() m.M, useKind, useDrum bool) *D {
+// AlgorithmX returns (a pointer to) a fresh Searcher
+// with silent default settings.
+func AlgorithmX(M func() m.M, setters ...do.Option) D {
+	a := algorithmX(M, false, true)
+	a.Settings(setters...) // user settings
+
+	return a
+}
+
+// AlgorithmC returns (a pointer to) a fresh Searcher
+// with silent default settings.
+func AlgorithmC(M func() m.M, setters ...do.Option) D {
+	a := algorithmX(M, true, true)
+	a.Settings(setters...) // user settings
+
+	return a
+}
+
+// ===========================================================================
+
+func algorithmX(M func() m.M, useKind, useDrum bool) D {
 	a := newD(M, useKind, useDrum)
 	if useKind {
 		a.Name = "AlgorithmC"

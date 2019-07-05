@@ -10,6 +10,16 @@ import (
 
 // ===========================================================================
 
+// Settings applies the Setters
+// and returns its undo function
+// which, when evaluated, fully
+// restores the previous setup.
+func (a *D) Settings(doit ...do.Option) do.Opt {
+	return do.Options(a, doit...)
+}
+
+// ===========================================================================
+
 // WrapIt returns a do.It which wraps the given functions applied to a.
 func (a *D) WrapIt(fs ...func(*D)) do.It {
 	switch len(fs) {

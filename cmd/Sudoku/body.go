@@ -8,12 +8,12 @@ import (
 	"github.com/GoLangsam/do"
 
 	"github.com/GoLangsam/dk-7.2.2.1/data"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
-	"github.com/GoLangsam/dk-7.2.2.1/internal/s" // searcher
 )
 
 func body(done do.Nok) {
-	for _, d := range []struct {
+	for _, data := range []struct {
 		name string
 		data [][]string
 	}{
@@ -23,26 +23,22 @@ func body(done do.Nok) {
 		{name: "Sudoku 29c", data: data.Sudoku(data.Hint29c())},
 	} {
 
-		if done.Do() {
-			break
-		}
-
-		M := func() m.M { return m.Problem(d.name, d.data...).Matrix() }
+		M := func() m.M { return m.Problem(data.name, data.data...).Matrix() }
 
 		for _, recur := range []bool{true, false} {
 			if done.Do() {
-				break
+				return
 			}
 
-			var a *s.S
+			var a d.D
 			if recur {
-				a = s.RecursiveX(M)
+				a = d.RecursiveX(M)
 			} else {
-				a = s.AlgorithmX(M)
+				a = d.AlgorithmX(M)
 			}
 
 			_ = a.Settings(
-				(&a.D.On.Skip).Add(done.Do),
+				(&a.On.Skip).Add(done.Do),
 				getFlagOption(),
 			)
 

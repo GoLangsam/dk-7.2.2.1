@@ -20,10 +20,10 @@ func getFlagOption() do.Option {
 	options := []do.Option{}
 
 	if *times {
-		options = append(options, dl.ShowTime())
+		options = append(options, dl.LogTime())
 	}
 	if *sizes {
-		options = append(options, dl.ShowSize())
+		options = append(options, dl.LogSize())
 	}
 	if false { // *goals {
 		//options = append(options, dl.OnGoal(d.ShowGoal))

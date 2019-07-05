@@ -5,9 +5,6 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/GoLangsam/do"
 	"github.com/GoLangsam/do/cli/cancel"
 )
 
@@ -15,22 +12,14 @@ func main() {
 	flagParse()
 
 	ctx, _ := cancel.WithCancel()
+	doneFn := cancel.Done(ctx)
 
-	var done do.Nok
-	done = func() bool {
-		select {
-		case <-ctx.Done():
-			return true
-		default:
-		}
-		return false
-	}
+	body(doneFn)
 
-	body(done)
 	if ctx.Err() != nil {
-		fmt.Println("Early graceful exit - because:", ctx.Err().Error())
+		see("Early graceful exit!", tab, "reason:", tab, ctx.Err().Error())
 	}
 
-	fmt.Println()
+	see()
 
 }

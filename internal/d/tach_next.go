@@ -10,7 +10,7 @@ import (
 
 // ===========================================================================
 
-// Next chooses the index of another primary Item
+// Next chooses another primary Item index
 // among the remaining items and returns it for Dance(i).
 //
 // Chosen is the first item with the smallest number of options.

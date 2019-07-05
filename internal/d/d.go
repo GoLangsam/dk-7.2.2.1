@@ -39,7 +39,7 @@ type CellS []cell
 
 // ===========================================================================
 
-// L consolidates local data for backtracking
+// L consolidates local backtracking data
 // and may be visited by On actions.
 type L struct {
 	x.Index // the level - the depth of recursion
@@ -53,7 +53,7 @@ type L struct {
 type D struct {
 	x.Name               // the name of the alorithm in use
 	m.M                  // the problem Matrix
-	*L                   // the local variables of the Dancer - for visitors
+	L                    // the local backtracking data - for visitors
 	*drum.Drum           // the update Drum - incremented in DoHide
 	*On                  // the plug-in functions: what to do when
 	tacher               // can do and reCover
@@ -64,7 +64,7 @@ type D struct {
 
 // New returns a fresh Dancer
 // based on the given problem Matrix.
-func newD(M func() m.M, useKind, useDrum bool) *D {
+func newD(M func() m.M, useKind, useDrum bool) D {
 	a := D{M: M(), On: &On{}}
 	if useDrum {
 		a.Drum = drum.NewDrum("UpOptaS", len(a.M.OptaS))
@@ -82,11 +82,11 @@ func newD(M func() m.M, useKind, useDrum bool) *D {
 		a.choose = tach.Next
 	}
 
-	a.L = &L{CellS: make([]cell, len(a.M.ItemS)), // sure this is large enough
+	a.L = L{CellS: make([]cell, len(a.M.ItemS)), // sure this is large enough
 		optaS: a.OptaS,
 	}
 
-	return &a
+	return a
 }
 
 // ===========================================================================

@@ -15,9 +15,9 @@ import (
 
 // ===========================================================================
 
-// ShowSize prints a starting-line upon Init
-// showing the size of the problem representation.
-func ShowSize() do.Option {
+// LogSize logs a starting-line upon Init
+// with the size of the problem representation.
+func LogSize() do.Option {
 	return func(any interface{}) do.Opt {
 		a := aD(any)
 
@@ -29,7 +29,7 @@ func ShowSize() do.Option {
 		optas := fmt.Sprint("Optas:", tab, lO, "*", sO, "=", lO*sO)
 
 		init := func() {
-			fmt.Println(a.Name,
+			see(a.Name, a.M.Name,
 				tab, "starting",
 				tab, items,
 				tab, optas,
@@ -45,18 +45,23 @@ func ShowSize() do.Option {
 
 // ===========================================================================
 
-// ShowTime prints a finished-line upon Done
-// showing the time elapsed since On.Init.
+// LogTime logs a finished-line upon Done
+// with the time elapsed since On.Init.
 //
 // Note: runtime.GC is forced before the timer starts.
-func ShowTime() do.Option {
+func LogTime() do.Option {
 	return func(any interface{}) do.Opt {
 		a := aD(any)
 
 		var t time.Time
 		init := func() { t = time.Now() }
 		show := func() string { return fmt.Sprint(time.Since(t)) }
-		done := func() { fmt.Println(a.Name, tab, "finished", tab, "Time:", tab, show()) }
+		done := func() {
+			see(a.Name, a.M.Name,
+				tab, "finished",
+				tab, "Time:",
+				tab, show())
+		}
 
 		undoInit := (&a.On.Init).Add(runtime.GC, init)(a)
 		undoDone := (&a.On.Done).Add(done)(a)
@@ -66,3 +71,5 @@ func ShowTime() do.Option {
 		}
 	}
 }
+
+// ===========================================================================

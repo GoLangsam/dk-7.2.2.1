@@ -6,7 +6,6 @@ package dl
 
 import (
 	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
-	"github.com/GoLangsam/dk-7.2.2.1/internal/s" // searching
 )
 
 // ===========================================================================
@@ -15,14 +14,9 @@ import (
 // or panics, iff any has some other 'strange' type.
 //
 // Use of aD in every do.Option function
-// allows to apply such on a (*)d.D directly,
-// or on some (*)s.S (which wraps it).
+// allows to apply such on a (*)d.D.
 func aD(any interface{}) *d.D {
 	switch t := any.(type) {
-	case *s.S:
-		return (*t).D
-	case s.S:
-		return t.D
 	case *d.D:
 		return t
 	case d.D:

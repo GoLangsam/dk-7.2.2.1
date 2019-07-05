@@ -10,29 +10,28 @@ import (
 
 // ===========================================================================
 
-func (a tachX) UnCoverOthers(vi x.Index) {
+func (a tachX) UnCoverOthers(v x.Index) {
 	var (
-		hi x.Index // some option adjacent to vi - think: horizontal
+		hi x.Index // some option adjacent to v - think: horizontal
 		hO *x.Opta // OptaS[di]
 		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
 	)
 
 	{
 
-		// Beg of UnCoverOthers ==========================================
-		hi = vi - 1
-		for hi != vi {
+		// Beg of CoverOthers ==========================================
+		hi = v - 1
+		for hi != v {
 			hO = &a.OptaS[hi]
 			if hO.Root < 0 { // Spacer
 				hi = hO.Next
 				continue
 			}
-
 			i = hO.Root  // Change variable in order to ease inlining
 			a.UnCover(i) // Inline ========================================
 			hi--
 		}
-		// End of UnCoverOthers ==========================================
+		// End of CoverOthers ==========================================
 
 	}
 }
@@ -90,7 +89,7 @@ func (a tachX) UnHide(p x.Index) {
 					continue
 				}
 
-				//  a.OptaS.ReTach(qq) =======================================
+				//  a.OptaS.ReTach(qO) =======================================
 				qu = qO.Prev
 				qd = qO.Next
 				a.OptaS[qd].Prev = qi

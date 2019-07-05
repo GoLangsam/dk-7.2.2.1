@@ -10,24 +10,23 @@ import (
 
 // ===========================================================================
 
-func (a tachX) DoCoverOthers(vi x.Index) {
+func (a tachX) DoCoverOthers(v x.Index) {
 	var (
-		hi x.Index // some option adjacent to vi - think: horizontal
+		hi x.Index // some option adjacent to v - think: horizontal
 		hO *x.Opta // OptaS[hi]
-		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
+		i  x.Index // for inline-..Cover(i)
 	)
 
 	{
 
 		// Beg of CoverOthers ==========================================
-		hi = vi + 1
-		for hi != vi {
+		hi = v + 1
+		for hi != v {
 			hO = &a.OptaS[hi]
 			if hO.Root < 0 { // Spacer
 				hi = hO.Prev
 				continue
 			}
-
 			i = hO.Root  // Change variable in order to ease inlining
 			a.DoCover(i) // Inline ========================================
 			hi++
@@ -40,6 +39,7 @@ func (a tachX) DoCoverOthers(vi x.Index) {
 // ===========================================================================
 
 func (a tachX) DoCover(i x.Index) {
+
 	var (
 		iI     *x.Item // cover: ItemS[i]
 		il, ir x.Index // cover: left, right
@@ -51,7 +51,6 @@ func (a tachX) DoCover(i x.Index) {
 		// Beg of Cover ======================================================
 		for p = a.OptaS[i].Next; p != i; p = a.OptaS[p].Next {
 			a.DoHide(p) // Inline ========================================
-
 		}
 
 		iI = &a.ItemS[i]

@@ -7,7 +7,7 @@ package x
 // ===========================================================================
 
 // MarkS represents a collection of markers, where such mark
-// is a root of (primary or some secondary) items
+// is either a root of (primary or some secondary) items
 // or a spacer around some option-line.
 type MarkS []Index
 

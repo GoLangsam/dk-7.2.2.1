@@ -10,29 +10,30 @@ import (
 	"github.com/GoLangsam/do"
 
 	"github.com/GoLangsam/dk-7.2.2.1/data"
+	"github.com/GoLangsam/dk-7.2.2.1/internal/d" // dancing
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
-	"github.com/GoLangsam/dk-7.2.2.1/internal/s" // searcher
 )
 
 func body(done do.Nok) {
 	for N := *beg; N <= *end && !done.Do(); N++ {
 
 		name := strconv.Itoa(N) + "-QueensR"
+		M := func() m.M { return m.Problem(name, data.NQueensR(N)...).Matrix() }
+
 		for _, recur := range []bool{true, false} {
 			if done.Do() {
-				break
+				return
 			}
 
-			M := func() m.M { return m.Problem(name, data.NQueensR(N)...).Matrix() }
-			var a *s.S
+			var a d.D
 			if recur {
-				a = s.RecursiveX(M)
+				a = d.RecursiveX(M)
 			} else {
-				a = s.AlgorithmX(M)
+				a = d.AlgorithmX(M)
 			}
 
 			_ = a.Settings(
-				(&a.D.On.Skip).Add(done.Do),
+				(&a.On.Skip).Add(done.Do),
 				getFlagOption(),
 			)
 

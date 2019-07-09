@@ -8,6 +8,11 @@ package main
 
 import "log"
 
+const (
+	tab = "\t"
+	eol = "\n"
+)
+
 var se_ = log.Print
 var see = log.Println
 var sef = log.Printf

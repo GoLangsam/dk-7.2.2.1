@@ -13,17 +13,12 @@ import (
 )
 
 func body(done do.Nok) {
-	for _, data := range []struct {
-		name string
-		data [][]string
-	}{
-		{name: "SmallMatrix", data: data.SmallMatrix()},
-		{name: "Sudoku 29a", data: data.Sudoku(data.Hint29a())},
-		{name: "Sudoku 29b", data: data.Sudoku(data.Hint29b())},
-		{name: "Sudoku 29c", data: data.Sudoku(data.Hint29c())},
-	} {
 
-		M := func() m.M { return m.Problem(data.name, data.data...).Matrix() }
+	for _, hint := range []func() (string, data.SudokuHint){data.Hint29a, data.Hint29b, data.Hint29c} {
+
+		name, lines := data.Sudoku(hint())
+
+		M := func() m.M { return m.Problem(name, lines...).Matrix() }
 
 		for _, recur := range []bool{true, false} {
 			if done.Do() {

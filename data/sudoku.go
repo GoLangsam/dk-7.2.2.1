@@ -39,7 +39,7 @@ Got it?
 func sudokuBlock(i, j int) int { return (i/3)*3 + j/3 }
 
 // Sudoku returns a Sudoku problem for the given hint.
-func Sudoku(hint SudokuHint) [][]string {
+func Sudoku(name string, hint SudokuHint) (string, [][]string) {
 
 	const N = 9 // Size of sudoku square
 	const D = 9 // No of different digits in sudoku square
@@ -106,5 +106,5 @@ func Sudoku(hint SudokuHint) [][]string {
 		}
 	}
 
-	return append([][]string{itemS, {}}, optaS...) // items & separator & options
+	return name, append([][]string{itemS, {}}, optaS...) // items & separator & options
 }

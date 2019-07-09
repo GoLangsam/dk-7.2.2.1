@@ -5,8 +5,6 @@
 package main
 
 import (
-	"strconv"
-
 	"github.com/GoLangsam/do"
 
 	"github.com/GoLangsam/dk-7.2.2.1/data"
@@ -15,11 +13,12 @@ import (
 )
 
 func body(done do.Nok) {
+
 	for N := *beg; N <= *end && !done.Do(); N++ {
 
-		name := strconv.Itoa(N) + "-Queens"
+		name, lines := data.NQueens(N)
 
-		M := func() m.M { return m.Problem(name, data.NQueens(N)...).Matrix() }
+		M := func() m.M { return m.Problem(name, lines...).Matrix() }
 
 		for _, recur := range []bool{true, false} {
 			if done.Do() {

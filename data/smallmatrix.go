@@ -5,16 +5,17 @@
 package data
 
 // SmallMatrix returns the small problem
-func SmallMatrix() [][]string {
+func SmallMatrix() (string, [][]string) {
 
-	return [][]string{
-		{"a", "b", "c", "d", "e", "f", "g"},
-		{},
-		{"c", "e"},
-		{"a", "d", "g"},
-		{"b", "c", "f"},
-		{"a", "d", "f"},
-		{"b", "g"},
-		{"d", "e", "g"},
-	}
+	return "SmallMatrix",
+		[][]string{
+			{"a", "b", "c", "d", "e", "f", "g"},
+			{},
+			{"c", "e"},
+			{"a", "d", "g"},
+			{"b", "c", "f"},
+			{"a", "d", "f"},
+			{"b", "g"},
+			{"d", "e", "g"},
+		}
 }

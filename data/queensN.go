@@ -5,19 +5,21 @@
 package data
 
 import (
+	"strconv"
+
 	"github.com/GoLangsam/do/id"
 )
 
 // NQueens returns a N-Queens problem
 // where both rows and ranks are primary.
-func NQueens(N int) (lines [][]string) {
-	return nQueens(N, false)
+func NQueens(N int) (name string, lines [][]string) {
+	return strconv.Itoa(N) + "-Queens", nQueens(N, false)
 }
 
 // NQueensR returns a N-Queens problem
 // where 'only' the rows are primary.
-func NQueensR(N int) (lines [][]string) {
-	return nQueens(N, true)
+func NQueensR(N int) (name string, lines [][]string) {
+	return strconv.Itoa(N) + "-QueensR", nQueens(N, true)
 }
 
 func nQueens(N int, onlyR bool) (lines [][]string) {

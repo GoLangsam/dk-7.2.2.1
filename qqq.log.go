@@ -2,25 +2,26 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:pattern "github.com/GoLangsam/do/qqq/qqq.log.go"
+
 package dl
 
 import "log"
 
-var se_ = log.Print
-var see = log.Println
-var sef = log.Printf
+const (
+	tab = "\t"
+	eol = "\n"
+)
 
-var di_ = log.Panic
-var die = log.Panicln
-var dif = log.Panicf
+var (
+	see = log.Println
+	sef = log.Printf
 
-var verbose bool
+	die = log.Panicln
+	dif = log.Panicf
 
-func qq_(args ...interface{}) {
-	if verbose {
-		se_(args...)
-	}
-}
+	verbose bool
+)
 
 func qqq(args ...interface{}) {
 	if verbose {

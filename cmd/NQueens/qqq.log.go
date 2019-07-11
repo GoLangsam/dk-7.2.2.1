@@ -13,21 +13,15 @@ const (
 	eol = "\n"
 )
 
-var se_ = log.Print
-var see = log.Println
-var sef = log.Printf
+var (
+	see = log.Println
+	sef = log.Printf
 
-var di_ = log.Panic
-var die = log.Panicln
-var dif = log.Panicf
+	die = log.Panicln
+	dif = log.Panicf
 
-var verbose bool
-
-func qq_(args ...interface{}) {
-	if verbose {
-		se_(args...)
-	}
-}
+	verbose bool
+)
 
 func qqq(args ...interface{}) {
 	if verbose {

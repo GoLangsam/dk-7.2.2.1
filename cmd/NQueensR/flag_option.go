@@ -33,7 +33,7 @@ func getFlagOption() do.Option {
 		options = append(options, dl.VerboseD(*choos))
 	}
 	if *verbs {
-		options = append(options, dl.VerboseS(*verbs), dl.VerboseM(*verbs), dl.VerboseX(*verbs))
+		options = append(options, dl.VerboseM(*verbs), dl.VerboseX(*verbs))
 	}
 	if *dGoal {
 		options = append(options, dl.CountGrooves(*dGoalMap))
@@ -50,6 +50,10 @@ func getFlagOption() do.Option {
 	if *dleaf {
 		options = append(options, dl.CountUpdates(*dleafMap))
 	} // Count updates per cell
+
+	if *progress {
+		options = append(options, dl.LogProgress(*progressCnt))
+	}
 
 	return do.OptionJoin(options...)
 }

@@ -13,8 +13,8 @@ import (
 // Tacher represents someone who knows
 // how to DeTach and ReTach nodes of the matrix.
 type tacher interface {
-	DoCover(i x.Index)
-	UnCover(i x.Index)
+	DoCover(i x.Main)
+	UnCover(i x.Main)
 	DoCoverOthers(v x.Index)
 	UnCoverOthers(v x.Index)
 }

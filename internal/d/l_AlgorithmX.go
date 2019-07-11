@@ -11,12 +11,12 @@ func (l *L) algorithmX(
 	on *On,
 	root *x.Item,
 	next chooser,
-	mainS []x.Index,
 ) {
 
 	var (
-		i x.Index // main col - found by Choice, for DoCover & UnCover
-		v x.Index // option cell - found on Stack.Top(), for DoCoverOthers & UnCoverOthers
+		i  x.Main  // main col - found by Choice, for DoCover & UnCover
+		v  x.Index // position of option cell
+		vO *x.Opta // option cell - found in Cells, for DoCoverOthers & UnCoverOthers
 	)
 
 X2: // [Enter level] =============================================
@@ -30,45 +30,36 @@ X2: // [Enter level] =============================================
 		goto X8 // >>>>>>>>>>
 	}
 	i = next(root) // X3. [Choose c]
-
-	if l.optaS[i].Next == i { // => X7 - deadend
+	v, vO = i, &l.optaS[i]
+	l.SetItem(i, v, vO) // Remember main
+	if vO.Next == i {   // => X7 - deadend
 		if on.Fail != nil {
 			on.Fail.Do()
 		} // we have a Dead end!
 		goto X7 // >>>>>>>>>>
 	}
-
-	{
-		d.DoCover(i) // Inline ========================================
-	}
-	l.CellS[l.Index] = l.optaS[i].Next // delayed a.Stack.Push()
-
+	d.DoCover(i)                       // Inline ========================================
+	v, vO = vO.Next, &l.optaS[vO.Next] // first option under i
 X5: // [Try x[l].] ===========================================================
-	v = l.CellS[l.Index] // a.Stack.Pop()
-	if v == i {          // => X7 - no more
-		goto X7 // (we've tried all options for i).
-	} // >>>>>>>>>>
-	d.DoCoverOthers(v) // Inline ========================================
-	l.Index++          // Incr Level
-	goto X2            // >>>>>>>>>>
-X6: // [Try again] ===========================================================
-	v = l.CellS[l.Index] // cell.Stack.Top()
-
-	d.UnCoverOthers(v) // Inline ========================================
-
-	i = l.optaS[v].Root
-	l.CellS[l.Index] = l.optaS[v].Next
-	goto X5 // >>>>>>>>>>
-X7: // [Backtrack] ===========================================================
-	{
-		d.UnCover(i) // Inline ========================================
+	if v == i { // => X7 - no more
+		goto X7 // >>>>>>>>>>
 	}
-
+	d.DoCoverOthers(v)  // Inline ========================================
+	l.SetItem(i, v, vO) // Remember cell
+	l.Level++           // Incr Level
+	goto X2             // >>>>>>>>>>
+X6: // [Try again] ===========================================================
+	v, vO = l.GetBoth()                            // Restore cell
+	d.UnCoverOthers(v)                             // Inline ========================================
+	i, v, vO = vO.Root, vO.Next, &l.optaS[vO.Next] // next option under i
+	goto X5                                        // >>>>>>>>>>
+X7: // [Backtrack] ===========================================================
+	d.UnCover(i) // Inline ========================================
 X8: // [Leave level] =========================================================
-	if l.Index == 0 { // => X9
+	if l.Level == 0 { // => X9
 		goto X9 // >>>>>>>>>>
 	}
-	l.Index-- // Decr Level
+	l.Level-- // Decr Level
 	goto X6   // >>>>>>>>>>
 
 X9: // we are done

@@ -8,7 +8,6 @@ import (
 	"github.com/GoLangsam/do"
 
 	"github.com/GoLangsam/dk-7.2.2.1/internal/m" // problem matrix
-	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
 
 // ===========================================================================
@@ -41,10 +40,8 @@ func algorithmX(M func() m.M, useKind, useDrum bool) D {
 		a.Name = "AlgorithmX"
 	}
 
-	mainS := make([]x.Index, len(a.M.ItemS)) // sure this is large enough
-
 	a.On.search = func() {
-		a.L.algorithmX(a.tacher, a.On, &a.ItemS[0], a.On.choose, mainS)
+		a.L.algorithmX(a.tacher, a.On, &a.ItemS[0], a.On.choose)
 	}
 
 	return a

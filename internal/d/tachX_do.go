@@ -14,7 +14,7 @@ func (a tachX) DoCoverOthers(v x.Index) {
 	var (
 		hi x.Index // some option adjacent to v - think: horizontal
 		hO *x.Opta // OptaS[hi]
-		i  x.Index // for inline-..Cover(i)
+		i  x.Main  // for inline-..Cover(i)
 	)
 
 	{
@@ -38,7 +38,7 @@ func (a tachX) DoCoverOthers(v x.Index) {
 
 // ===========================================================================
 
-func (a tachX) DoCover(i x.Index) {
+func (a tachX) DoCover(i x.Main) {
 
 	var (
 		iI     *x.Item // cover: ItemS[i]
@@ -105,6 +105,7 @@ func (a tachX) DoHide(p x.Index) {
 					(*a.It).Do() // count updates
 				}
 				// End of Update-Count =======================================
+
 			}
 			// End of Hide ===================================================
 

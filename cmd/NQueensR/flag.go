@@ -31,16 +31,19 @@ var (
 	/*
 		goals = flag.Bool("s", false, "Verbose Scoring: Print solutions")
 	*/
-	times = flag.Bool("t", false, "Show time on done")
-	choos = flag.Bool("u", false, "Print all choices made")
-	verbs = flag.Bool("v", false, "Verbose Dancing: Prints a lot of details")
+	times = flag.Bool("t", false, "Log time on done")
+	choos = flag.Bool("u", false, "Log all choices made")
+	verbs = flag.Bool("v", false, "Verbose: may log a lot of details")
+
+	progress    = flag.Bool("p", false, "Log progress")
+	progressCnt = flag.Int64("pc", 10, "any N-million updates")
 
 	/*
 		tests = flag.Bool("x", false, "Execute Chooser-test")
 		dancs = flag.Bool("y", false, "Execute Dancing-test (-Fast -norm -Slow -List)")
 	*/
 
-	sizes = flag.Bool("z", false, "Show sizes on init")
+	sizes = flag.Bool("z", false, "Log sizes on init")
 
 	dGoal = flag.Bool("cg", false, "Count Grooves")
 	dFail = flag.Bool("cd", false, "Count DeadEnd")

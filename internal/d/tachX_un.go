@@ -14,7 +14,7 @@ func (a tachX) UnCoverOthers(v x.Index) {
 	var (
 		hi x.Index // some option adjacent to v - think: horizontal
 		hO *x.Opta // OptaS[di]
-		i  x.Index // DoCover(i): i or hO.Root // Change variable in order to ease inlining
+		i  x.Main  // DoCover(i): i or hO.Root // Change variable in order to ease inlining
 	)
 
 	{
@@ -38,7 +38,8 @@ func (a tachX) UnCoverOthers(v x.Index) {
 
 // ===========================================================================
 
-func (a tachX) UnCover(i x.Index) {
+func (a tachX) UnCover(i x.Main) {
+
 	var (
 		iI     *x.Item // cover: ItemS[i]
 		il, ir x.Index // cover: left, right
@@ -58,7 +59,6 @@ func (a tachX) UnCover(i x.Index) {
 
 		for p = a.OptaS[i].Prev; p != i; p = a.OptaS[p].Prev {
 			a.UnHide(p) // Inline ========================================
-
 		}
 		// End of Cover ======================================================
 

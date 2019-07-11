@@ -80,17 +80,6 @@ func OnLeaf(fs ...func(*d.D)) do.Option {
 
 // ===========================================================================
 
-// VerboseS controls the verbosity setting of package d.
-func VerboseS(v bool) do.Option {
-	return func(any interface{}) do.Opt {
-		prev := verbose
-		verbose = v
-		return func() do.Opt {
-			return VerboseS(prev)(any)
-		}
-	}
-}
-
 // VerboseD controls the verbosity setting of package d.
 func VerboseD(v bool) do.Option {
 	return func(any interface{}) do.Opt {

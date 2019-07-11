@@ -13,22 +13,25 @@ import (
 func (l *L) recurDance(
 	d tacher,
 	on *On,
-	i x.Index,
-
+	i x.Main,
 ) {
 
 	{
 		d.DoCover(i) // Inline ========================================
 	}
 
-	for v := l.optaS[i].Next; v != i; v = l.optaS[v].Next {
+	vO := &l.optaS[i]
+	v := vO.Next
+	for v != i {
 
-		l.CellS[l.Index] = v // Remember cell
-		l.Index++            // Incr Level
-		d.DoCoverOthers(v)   // Inline ========================================
-		on.down()            // Twirl
-		d.UnCoverOthers(v)   // Inline ========================================
-		l.Index--            // Decr Level
+		vO = &l.optaS[v]    // read cell
+		l.SetItem(i, v, vO) // Remember cell
+		l.Level++           // Incr Level
+		d.DoCoverOthers(v)  // Inline ========================================
+		on.down()           // Twirl
+		d.UnCoverOthers(v)  // Inline ========================================
+		l.Level--           // Decr Level
+		v = vO.Next         // next cell pointer
 	}
 
 	{

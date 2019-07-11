@@ -73,3 +73,42 @@ func LogTime() do.Option {
 }
 
 // ===========================================================================
+
+// LogProgress sends a progress line to the current logger
+// upon everyNmillion (minimum = 10) updates
+// which shows the completition (in permille)
+// as well as the number of Grooves, DeadEnd and millions-of-Updates.
+func LogProgress(everyNmillion int64) do.Option {
+	return func(any interface{}) do.Opt {
+		a := aD(any)
+
+		if everyNmillion < 1 {
+			everyNmillion = 1
+		}
+		million := int64(1000000)
+		step := everyNmillion * million
+		N := step - 1
+
+		var goals, fails, leafs int64
+		goal := func() { goals++ }
+		fail := func() { fails++ }
+		leaf := func() {
+			leafs++
+			if leafs > N {
+				see(a.Permille(), "%o",
+					tab, "Grooves:", goals,
+					tab, "DeadEnd:", fails,
+					tab, "Updates:", leafs/million, "Mio.",
+				)
+				N += step
+			}
+		}
+
+		undoGoal := (&a.On.Goal).Add(goal)(a)
+		undoFail := (&a.On.Fail).Add(fail)(a)
+		undoLeaf := (&a.On.Leaf).Add(leaf)(a)
+		return func() do.Opt {
+			return do.OptJoin(undoGoal, undoFail, undoLeaf)
+		}
+	}
+}

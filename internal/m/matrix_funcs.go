@@ -6,6 +6,7 @@ package m
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/GoLangsam/dk-7.2.2.1/internal/x" // all we need
 )
@@ -46,6 +47,9 @@ func (a *M) AssertOptionCell(i x.Index) {
 
 // ===========================================================================
 
+// OptionCellIsKofN returns for the given i its position k
+// among the total on n members of its option line,
+// or panics iff i is not cell of an option.
 func (a *M) OptionCellIsKofN(i x.Index) (k, n int) {
 	a.AssertOptionCell(i)
 
@@ -58,28 +62,44 @@ func (a *M) OptionCellIsKofN(i x.Index) (k, n int) {
 	for k = 1; q != i && q != ri; k++ {
 		q = a.OptaS[q].Next
 	}
-	if q == ri {
-		k, n = 0, 0
-	}
 	return
 }
 
 // ===========================================================================
 
 // ShowOption exercice 12
-func (a *M) ShowOption(i x.Index) {
+func (a *M) ShowOption(i x.Index) string {
+	var b strings.Builder
+
+	a.WriteOptionLine(&b, i)
+	b.WriteString(string(a.NameS[a.OptaS[i].Root]))
+	b.WriteString(tab)
 	k, n := a.OptionCellIsKofN(i) // includes AssertOptionCell
+	b.WriteString(fmt.Sprint("=", k, "/", n))
+	b.WriteString(eol)
+	return b.String()
+}
 
-	show := func(i x.Index) { fmt.Print(a.NameS[a.OptaS[i].Root], tab) }
-	a.Do(show).ForEachLineNext(i)
+// ===========================================================================
 
-	name := a.NameS[a.OptaS[i].Root]
-	if k != 0 {
-		fmt.Print("the option containing", name, " is ", k, " of ", n, tab)
-	} else {
-		fmt.Print("the option containing", name, " is not on this list", tab)
+// WriteOptionLine writes the option line of given v
+// into the provided strings.Builder.
+func (a *M) WriteOptionLine(b *strings.Builder, v x.Index) {
+	tab := func() { b.WriteString(tab) }
+	show := func(i x.Index) { b.WriteString(string(a.NameS[a.OptaS[i].Root])); tab() }
+
+	for h := v; ; {
+		if a.OptaS[h].Root < 0 { // Spacer
+			h = a.OptaS[h].Prev
+			continue
+		}
+		show(h)
+		h++
+		if h != v {
+			break
+		}
 	}
-	fmt.Println()
+	b.WriteString(eol)
 }
 
 // ===========================================================================

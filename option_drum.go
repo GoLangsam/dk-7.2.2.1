@@ -17,7 +17,7 @@ func beatShow(a *d.D, name string, cap int, useMap bool) (beat, show do.It) {
 	drum := drum.NewDrum(name, cap)
 	drum.UseMap = useMap
 
-	beat = a.WrapIt(func(d *d.D) { drum.Beat(int(d.L.Index)) })
+	beat = a.WrapIt(func(d *d.D) { drum.Beat(int(d.L.Level)) })
 	show = drum.Print
 	return
 }

@@ -41,7 +41,7 @@ func recursiveX(M func() m.M, useKind, useDrum bool) D {
 		a.Name = "RecursiveX"
 	}
 
-	a.On.next = func(m x.Index) {
+	a.On.next = func(m x.Main) {
 		a.L.recurDance(a.tacher, a.On, m)
 	} // for recursive version
 	a.On.down = func() {

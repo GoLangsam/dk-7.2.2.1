@@ -30,9 +30,8 @@ X2: // [Enter level] =============================================
 		goto X8 // >>>>>>>>>>
 	}
 	i = next(root) // X3. [Choose c]
-	v, vO = i, &l.optaS[i]
-	l.SetItem(i, v, vO) // Remember main
-	if vO.Next == i {   // => X7 - deadend
+	vO = &l.optaS[i]
+	if vO.Next == i { // => X7 - deadend
 		if on.Fail != nil {
 			on.Fail.Do()
 		} // we have a Dead end!
@@ -45,14 +44,14 @@ X5: // [Try x[l].] ===========================================================
 		goto X7 // >>>>>>>>>>
 	}
 	d.DoCoverOthers(v)  // Inline ========================================
-	l.SetItem(i, v, vO) // Remember cell
+	l.SetCell(i, v, vO) // Remember cell
 	l.Level++           // Incr Level
 	goto X2             // >>>>>>>>>>
 X6: // [Try again] ===========================================================
-	v, vO = l.GetBoth()                            // Restore cell
-	d.UnCoverOthers(v)                             // Inline ========================================
-	i, v, vO = vO.Root, vO.Next, &l.optaS[vO.Next] // next option under i
-	goto X5                                        // >>>>>>>>>>
+	i, v, vO = l.GetCell()             // Restore cell
+	d.UnCoverOthers(v)                 // Inline ========================================
+	v, vO = vO.Next, &l.optaS[vO.Next] // next option under i
+	goto X5                            // >>>>>>>>>>
 X7: // [Backtrack] ===========================================================
 	d.UnCover(i) // Inline ========================================
 X8: // [Leave level] =========================================================

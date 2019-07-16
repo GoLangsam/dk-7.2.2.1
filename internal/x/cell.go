@@ -37,32 +37,15 @@ func NewCells(cap int) Cells {
 
 // ===========================================================================
 
-// SetItem stores the item at the current Level.
-func (a *Cells) SetItem(main Main, v Index, opta *Opta) {
+// SetCell stores the details of the cell at the current Level.
+func (a *Cells) SetCell(main Main, v Index, opta *Opta) {
 	a.CellS[a.Level] = cell{main, v, opta}
 }
 
-// SetOpta stores the Opta at the current Level.
-func (a *Cells) SetOpta(opta *Opta) {
-	a.CellS[a.Level].Opta = opta
-}
-
-// GetItem returns a structure which represents the item at the current Level.
-func (a *Cells) GetItem() (main Main) {
+// GetCell returns the details of the cell at the current Level.
+func (a *Cells) GetCell() (main Main, v Index, opta *Opta) {
 	c := a.CellS[a.Level]
-	main = c.Main
-	return
-}
-
-// GetOpta returns the opta and it's root in OptaS at the current Level.
-func (a *Cells) GetOpta() *Opta {
-	return a.CellS[a.Level].Opta
-}
-
-// GetBoth returns both: the main item and the opta at the current Level.
-func (a *Cells) GetBoth() (main Main, opta *Opta) {
-	c := a.CellS[a.Level]
-	main, opta = c.Main, c.Opta
+	main, v, opta = c.Main, c.Index, c.Opta
 	return
 }
 

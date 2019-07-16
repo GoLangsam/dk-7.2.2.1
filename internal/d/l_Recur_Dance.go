@@ -25,7 +25,7 @@ func (l *L) recurDance(
 	for v != i {
 
 		vO = &l.optaS[v]    // read cell
-		l.SetItem(i, v, vO) // Remember cell
+		l.SetCell(i, v, vO) // Remember cell
 		l.Level++           // Incr Level
 		d.DoCoverOthers(v)  // Inline ========================================
 		on.down()           // Twirl

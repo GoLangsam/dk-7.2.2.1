@@ -9,26 +9,6 @@ import (
 )
 
 // ===========================================================================
-/*
-// Do wraps matrix data, local backtracking data
-// (and some optional functions).
-//
-// Usage: a.Do(f).SomeThing(withThis)
-type Do struct {
-	*m.M
-	*x.Cells
-	Do []func(*D)
-}
-
-// ===========================================================================
-
-// Do returns a Do (which wraps search data and the optional functions) and
-// which provides several useful methods visiting an ongoing search.
-func (a *D) Do(fs ...func(*D)) Do {
-	return Do{&a.M, &a.L.Cells, append([]func(*D){}, fs...)}
-}
-*/
-// ===========================================================================
 
 // LogGoal sends a titled "Solution:" to the current logger.
 func LogGoal(a *D) {
@@ -39,14 +19,25 @@ func LogGoal(a *D) {
 // preceded by a title, iff some is given.
 func (a *D) ShowGoal(title string) string {
 	var b strings.Builder
-	a.WriteTitle(&b, title)
+	a.WriteTitleLine(&b, title)
 	for _, c := range a.Cells.Range() {
 		a.M.WriteOptionLine(&b, c.Index)
+		b.WriteString(eol)
 	}
 	return b.String()
 }
 
 // ===========================================================================
+
+// WriteTitleLine writes a title line (iff not empty)
+// preceded by D.Name and M.Name
+// into the provided strings.Builder.
+func (a *D) WriteTitleLine(b *strings.Builder, title string) {
+	if title != "" {
+		a.WriteTitle(b, title)
+		b.WriteString(eol)
+	}
+}
 
 // WriteTitle writes a title line (iff not empty)
 // preceded by D.Name and M.Name
@@ -59,7 +50,6 @@ func (a *D) WriteTitle(b *strings.Builder, title string) {
 		b.WriteString(string(a.M.Name))
 		b.WriteString(spc)
 		b.WriteString(title)
-		b.WriteString(eol)
 	}
 }
 
@@ -70,7 +60,8 @@ func (a *D) WriteTitle(b *strings.Builder, title string) {
 func (a *D) ShowOption() string {
 	var b strings.Builder
 	for _, c := range a.Cells.Range() {
-		b.WriteString(a.M.ShowOption(c.Index))
+		a.M.WriteOption(&b, c.Index)
+		b.WriteString(eol)
 	}
 	return b.String()
 }

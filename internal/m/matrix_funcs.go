@@ -67,17 +67,15 @@ func (a *M) OptionCellIsKofN(i x.Index) (k, n int) {
 
 // ===========================================================================
 
-// ShowOption exercice 12
-func (a *M) ShowOption(i x.Index) string {
-	var b strings.Builder
+// WriteOption as per exercice 12
+// into the provided strings.Builder.
+func (a *M) WriteOption(b *strings.Builder, i x.Index) {
 
-	a.WriteOptionLine(&b, i)
-	b.WriteString(string(a.NameS[a.OptaS[i].Root]))
+	a.WriteOptionLine(b, i)
 	b.WriteString(tab)
+	b.WriteString(string(a.NameS[a.OptaS[i].Root]))
 	k, n := a.OptionCellIsKofN(i) // includes AssertOptionCell
 	b.WriteString(fmt.Sprint("=", k, "/", n))
-	b.WriteString(eol)
-	return b.String()
 }
 
 // ===========================================================================
@@ -88,18 +86,13 @@ func (a *M) WriteOptionLine(b *strings.Builder, v x.Index) {
 	tab := func() { b.WriteString(tab) }
 	show := func(i x.Index) { b.WriteString(string(a.NameS[a.OptaS[i].Root])); tab() }
 
-	for h := v; ; {
-		if a.OptaS[h].Root < 0 { // Spacer
-			h = a.OptaS[h].Prev
-			continue
-		}
-		show(h)
-		h++
-		if h != v {
-			break
-		}
+	h := v
+	for ; !(a.OptaS[h].Root < 0); h++ { // find first: next Spacer
 	}
-	b.WriteString(eol)
+	h = a.OptaS[h].Prev                 // set first
+	for ; !(a.OptaS[h].Root < 0); h++ { // from first 'till Spacer
+		show(h)
+	}
 }
 
 // ===========================================================================

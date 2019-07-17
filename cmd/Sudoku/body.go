@@ -14,7 +14,7 @@ import (
 
 func body(done do.Nok) {
 
-	for _, hint := range []func() (string, data.SudokuHint){data.Hint29a, data.Hint29b, data.Hint29c} {
+	for _, hint := range []func() (string, data.SudokuHint){data.Hint28a, data.Hint28b, data.Hint29a, data.Hint29a67, data.Hint29b, data.Hint29c} {
 
 		name, lines := data.Sudoku(hint())
 

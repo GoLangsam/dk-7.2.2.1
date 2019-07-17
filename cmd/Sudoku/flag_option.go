@@ -25,9 +25,8 @@ func getFlagOption() do.Option {
 	if *sizes {
 		options = append(options, dl.LogSize())
 	}
-	if false { // *goals {
-		//options = append(options, dl.OnGoal(d.ShowGoal))
-		_ = d.GetVerbose() // to silent import
+	if *goals {
+		options = append(options, dl.OnGoal(d.LogGoal))
 	}
 	if *choos {
 		options = append(options, dl.VerboseD(*choos))

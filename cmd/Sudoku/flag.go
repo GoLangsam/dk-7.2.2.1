@@ -30,9 +30,7 @@ var (
 		rhyth = flag.Bool("r", false, "Rhythm: Collect counters")
 	*/
 
-	/*
-		goals = flag.Bool("s", false, "Verbose Scoring: Print solutions")
-	*/
+	goals = flag.Bool("s", false, "Verbose Scoring: Print solutions")
 	times = flag.Bool("t", false, "Log time on done")
 	choos = flag.Bool("u", false, "Log all choices made")
 	verbs = flag.Bool("v", false, "Verbose: may log a lot of details")

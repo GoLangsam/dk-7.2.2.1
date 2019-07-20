@@ -137,7 +137,7 @@ func (a SudokuHint) IsDinC(k, j int) bool {
 	return false
 }
 
-// IsDinR reports whether digit k is in box b.
+// IsDinB reports whether digit k is in box b.
 func (a SudokuHint) IsDinB(k, b int) bool {
 	d := k + 1
 	x := sudokuBlock

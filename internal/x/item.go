@@ -67,11 +67,13 @@ func (a ItemS) AppendItem(root Index) ItemS {
 
 // ===========================================================================
 
+// DeTach detaches the given item from the ItemS.
 func (a ItemS) DeTach(item Index) {
 	a[a[item].Prev].Next = a[item].Next
 	a[a[item].Next].Prev = a[item].Prev
 }
 
+// ReTach retaches the given item back into the ItemS.
 func (a ItemS) ReTach(item Index) {
 	a[a[item].Prev].Next = item
 	a[a[item].Next].Prev = item
@@ -81,10 +83,12 @@ func (a ItemS) ReTach(item Index) {
 // Note: Following methods intend to clarify some semantics.
 // For performance reasons they are not called elsewhere but inlined directly.
 
+// Llink returns the left link.
 func (a Item) Llink() Index {
 	return a.Prev
 }
 
+// Rlink returns the right link.
 func (a Item) Rlink() Index {
 	return a.Next
 }

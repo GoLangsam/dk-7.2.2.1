@@ -82,12 +82,16 @@ func (a OptaS) AppendMark(mark, prev Index) OptaS {
 
 // ===========================================================================
 
+// DeTach detaches the given item from the OptaS
+// and decrements their count.
 func (a OptaS) DeTach(item Index) {
 	a[a[item].Prev].Next = a[item].Next
 	a[a[item].Next].Prev = a[item].Prev
 	a[a[item].Root].Root--
 }
 
+// ReTach retaches the given item back into the OptaS
+// and increments their count.
 func (a OptaS) ReTach(item Index) {
 	a[a[item].Prev].Next = item
 	a[a[item].Next].Prev = item
@@ -98,14 +102,17 @@ func (a OptaS) ReTach(item Index) {
 // Note: Following methods intend to clarify some semantics.
 // For performance reasons they are not called elsewhere but inlined directly.
 
+// Top returns the header.
 func (a Opta) Top() Index {
 	return a.Root
 }
 
+// Ulink returns the up link.
 func (a Opta) Ulink() Index {
 	return a.Prev
 }
 
+// Dlink returns the down link.
 func (a Opta) Dlink() Index {
 	return a.Next
 }
@@ -124,10 +131,12 @@ func (a Opta) Len() int {
 	return int(a.Root)
 }
 
+// Up returns the up link.
 func (a Opta) Up() Index {
 	return a.Prev
 }
 
+// Down returns the down link.
 func (a Opta) Down() Index {
 	return a.Next
 }

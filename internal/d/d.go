@@ -13,18 +13,22 @@ import (
 
 // ===========================================================================
 
+// SetVerboseM sets the verbosity of package m to v.
 func SetVerboseM(v bool) {
 	m.SetVerbose(v)
 }
 
+// GetVerboseM returns the verbosity of package m.
 func GetVerboseM() bool {
 	return m.GetVerbose()
 }
 
+// SetVerboseX sets the verbosity of package x to v.
 func SetVerboseX(v bool) {
 	x.SetVerbose(v)
 }
 
+// GetVerboseX returns the verbosity of package x.
 func GetVerboseX() bool {
 	return x.GetVerbose()
 }
@@ -40,6 +44,7 @@ type L struct {
 
 // ===========================================================================
 
+// D consolidates the data of a dancer.
 type D struct {
 	x.Name               // the name of the alorithm in use
 	m.M                  // the problem Matrix

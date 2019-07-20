@@ -13,7 +13,7 @@ import (
 
 // ===========================================================================
 
-// RecursivX returns (a pointer to) a fresh Searcher
+// RecursiveX returns (a pointer to) a fresh Searcher
 // with silent default settings.
 func RecursiveX(M func() m.M, setters ...do.Option) D {
 	a := recursiveX(M, false, true)
@@ -22,7 +22,7 @@ func RecursiveX(M func() m.M, setters ...do.Option) D {
 	return a
 }
 
-// RecursivC returns (a pointer to) a fresh Searcher
+// RecursiveC returns (a pointer to) a fresh Searcher
 // with silent default settings.
 func RecursiveC(M func() m.M, setters ...do.Option) D {
 	a := recursiveX(M, true, true)

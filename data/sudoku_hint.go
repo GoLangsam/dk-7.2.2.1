@@ -4,7 +4,7 @@
 
 package data
 
-// see page 135, Answer to 67
+// Hint28a see page 135, Answer to 67.
 func Hint28a() (string, SudokuHint) {
 	return "Sudoku28a",
 		[][]int{
@@ -20,6 +20,7 @@ func Hint28a() (string, SudokuHint) {
 		}
 }
 
+// Hint28b see page 135, Answer to 67.
 func Hint28b() (string, SudokuHint) {
 	return "Sudoku28b",
 		[][]int{
@@ -35,6 +36,7 @@ func Hint28b() (string, SudokuHint) {
 		}
 }
 
+// Hint29a see page 10.
 func Hint29a() (string, SudokuHint) {
 	return "Sudoku29a",
 		[][]int{
@@ -50,6 +52,7 @@ func Hint29a() (string, SudokuHint) {
 		}
 }
 
+// Hint29a67 see page 135, Answer to 67
 func Hint29a67() (string, SudokuHint) {
 	return "Sudoku29a67",
 		[][]int{
@@ -65,6 +68,7 @@ func Hint29a67() (string, SudokuHint) {
 		}
 }
 
+// Hint29b see page 10.
 func Hint29b() (string, SudokuHint) {
 	return "Sudoku29b",
 		[][]int{
@@ -80,6 +84,7 @@ func Hint29b() (string, SudokuHint) {
 		}
 }
 
+// Hint29c see page 10.
 func Hint29c() (string, SudokuHint) {
 	return "Sudoku29c",
 		[][]int{
@@ -110,6 +115,7 @@ func (a SudokuHint) Hint(i, j int) []int {
 	return []int{a[i][j]}
 }
 
+// IsDinR reports whether digit k is in row i.
 func (a SudokuHint) IsDinR(k, i int) bool {
 	d := k + 1
 	for _, ki := range a[i] {
@@ -120,6 +126,7 @@ func (a SudokuHint) IsDinR(k, i int) bool {
 	return false
 }
 
+// IsDinC reports whether digit k is in column j.
 func (a SudokuHint) IsDinC(k, j int) bool {
 	d := k + 1
 	for _, r := range a {
@@ -130,6 +137,7 @@ func (a SudokuHint) IsDinC(k, j int) bool {
 	return false
 }
 
+// IsDinR reports whether digit k is in box b.
 func (a SudokuHint) IsDinB(k, b int) bool {
 	d := k + 1
 	x := sudokuBlock

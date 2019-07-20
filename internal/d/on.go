@@ -40,11 +40,22 @@ type On struct {
 
 // ===========================================================================
 
+// GetInit returns (a pointer to) the function On.Init.
 func (a On) GetInit() *do.It  { return &a.Init }
+
+// GetSkip returns (a pointer to) the function On.Skip.
 func (a On) GetSkip() *do.Nok { return &a.Skip }
+
+// GetGoal returns (a pointer to) the function On.Goal.
 func (a On) GetGoal() *do.It  { return &a.Goal }
+
+// GetFail returns (a pointer to) the function On.Fail.
 func (a On) GetFail() *do.It  { return &a.Fail }
+
+// GetLeaf returns (a pointer to) the function On.Leaf.
 func (a On) GetLeaf() *do.It  { return &a.Leaf }
+
+// GetDone returns (a pointer to) the function On.Done.
 func (a On) GetDone() *do.It  { return &a.Done }
 
 // ===========================================================================
